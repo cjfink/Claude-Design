@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="100 Days Countdown Post" subtitle="5 variations on a canvas" viewport="1600x1920" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF — 100 Days · Variations</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; height: 100%; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="poster-100days.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+const PW = 460; // preview width per poster
+
+function App() {
+  return (
+    <DesignCanvas title="100 Days · Countdown Post" subtitle="9:16 · 1080×1920 · brand kit">
+      <DCSection id="colorways" title="Colorways" subtitle="Same centered layout, three brand grounds">
+        <DCArtboard id="forest" label="A · Forest" width={PW} height={Math.round(1920*PW/1080)}>
+          <Poster w={PW} colorway="forest" layout="stack" />
+        </DCArtboard>
+        <DCArtboard id="crema" label="B · Crema (light)" width={PW} height={Math.round(1920*PW/1080)}>
+          <Poster w={PW} colorway="crema" layout="stack" />
+        </DCArtboard>
+        <DCArtboard id="black" label="C · Black" width={PW} height={Math.round(1920*PW/1080)}>
+          <Poster w={PW} colorway="black" layout="stack" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="seal" title="Seal layout" subtitle="Leads to the circular festival lockup instead of the stacked wordmark">
+        <DCArtboard id="forest-seal" label="D · Forest · Seal" width={PW} height={Math.round(1920*PW/1080)}>
+          <Poster w={PW} colorway="forest" layout="seal" />
+        </DCArtboard>
+        <DCArtboard id="crema-seal" label="E · Crema · Seal" width={PW} height={Math.round(1920*PW/1080)}>
+          <Poster w={PW} colorway="crema" layout="seal" />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

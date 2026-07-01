@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Charlotte Hornets × TCCF — Step-and-Repeat Backdrop · Print</title>
+<style>
+  /* ── Print spec: 8 ft × 8 ft (96" × 96") large-format banner ──
+     This PDF is at native CSS pixel size (1080 × 1080 px).
+     Instruct your print vendor to output at 96" × 96" with no scaling.
+     For PDF/X-4: open in Acrobat Pro → Preflight → Convert to PDF/X-4,
+     embed FOGRA51 (coated) or ISOcoated_v2 profile as appropriate.
+  ─────────────────────────────────────────────────────────────────── */
+
+  @page {
+    size: 1080px 1080px;
+    margin: 0;
+  }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  @font-face {
+    font-family: "Styrene B";
+    src: url("fonts/StyreneB-Regular-Web.woff2") format("woff2"),
+         url("fonts/StyreneB-Regular.otf") format("opentype");
+    font-weight: 400; font-style: normal;
+  }
+  @font-face {
+    font-family: "GT Flexa Mono";
+    src: url("fonts/GT-Flexa-Mono-Regular.woff2") format("woff2");
+    font-weight: 400; font-style: normal;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px; height: 1080px;
+    overflow: hidden; background: #0B0916;
+  }
+
+  /* ── Banner fills the page exactly ── */
+  #banner {
+    width: 1080px; height: 1080px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      ellipse 88% 78% at 50% 46%,
+      #2C2654 0%, #201C3E 42%, #130F2A 100%
+    );
+    z-index: 0;
+  }
+  .bg-bloom {
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      ellipse 60% 55% at 50% 44%,
+      rgba(0,178,169,0.065) 0%, transparent 65%
+    );
+    z-index: 1;
+  }
+  .hex-grid {
+    position: absolute; inset: 0;
+    z-index: 2; opacity: 0.08;
+  }
+  .bean-texture {
+    position: absolute; inset: 0;
+    z-index: 3; opacity: 0.09;
+  }
+  #logo-grid {
+    position: absolute; inset: 0;
+    z-index: 4;
+  }
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      ellipse 90% 90% at 50% 50%,
+      transparent 30%, rgba(6,4,18,0.70) 100%
+    );
+    z-index: 5;
+  }
+  .spotlight {
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      ellipse 54% 50% at 50% 44%,
+      rgba(255,255,255,0.048) 0%, transparent 100%
+    );
+    z-index: 6;
+  }
+  .stripe-top {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg,
+      transparent 0%, #00B2A9 14%, #00B2A9 86%, transparent 100%
+    );
+    z-index: 7;
+  }
+  .stripe-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg,
+      transparent 0%, #00B2A9 14%, #00B2A9 86%, transparent 100%
+    );
+    z-index: 9;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 180px;
+    background: linear-gradient(0deg,
+      rgba(8,5,22,0.97) 0%,
+      rgba(10,7,26,0.93) 30%,
+      rgba(14,10,32,0.60) 58%,
+      rgba(16,12,34,0.18) 78%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 22px;
+    z-index: 8;
+  }
+  .footer-name {
+    font-family: "Styrene B", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 19px; letter-spacing: 0.30em; text-transform: uppercase;
+    color: #EBE5DB; margin-bottom: 6px;
+  }
+  .footer-detail {
+    font-family: "GT Flexa Mono", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(186,180,146,0.72); margin-bottom: 14px;
+  }
+  .footer-divider {
+    width: 300px; height: 1px;
+    background: linear-gradient(90deg,
+      transparent, rgba(0,178,169,0.38) 25%,
+      rgba(0,178,169,0.38) 75%, transparent
+    );
+    margin-bottom: 12px;
+  }
+  .footer-collab {
+    font-family: "Styrene B", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(235,229,219,0.42);
+    display: flex; align-items: center; gap: 13px;
+  }
+  .footer-collab-x { color: rgba(0,178,169,0.65); font-size: 11px; }
+</style>
+</head>
+<body>
+
+<div id="banner">
+  <div class="bg"></div>
+  <div class="bg-bloom"></div>
+
+  <svg class="hex-grid" xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" aria-hidden="true">
+    <defs>
+      <pattern id="hexPat" x="0" y="0" width="46" height="53.2" patternUnits="userSpaceOnUse">
+        <polygon points="23,1 44,13.3 44,39.9 23,52.2 2,39.9 2,13.3"
+                 fill="none" stroke="#7B68D8" stroke-width="0.65"/>
+      </pattern>
+    </defs>
+    <rect width="1080" height="1080" fill="url(#hexPat)"/>
+  </svg>
+
+  <svg class="bean-texture" xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" aria-hidden="true">
+    <defs>
+      <pattern id="beanPat" x="0" y="0" width="66" height="66" patternUnits="userSpaceOnUse">
+        <g transform="translate(33,33) rotate(28)">
+          <ellipse cx="0" cy="0" rx="8" ry="13.5" fill="#EBE5DB"/>
+          <line x1="0" y1="-11.5" x2="0" y2="11.5"
+                stroke="#201C3E" stroke-width="2.2" stroke-linecap="round"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="1080" height="1080" fill="url(#beanPat)"/>
+  </svg>
+
+  <div id="logo-grid"></div>
+
+  <div class="vignette"></div>
+  <div class="spotlight"></div>
+  <div class="stripe-top"></div>
+
+  <div class="footer">
+    <div class="footer-name">The Charlotte Coffee Festival</div>
+    <div class="footer-detail">September 12, 2026 &nbsp;&bull;&nbsp; Lenny Boy Brewing Co.</div>
+    <div class="footer-divider"></div>
+    <div class="footer-collab">
+      <span>Charlotte Hornets</span>
+      <span class="footer-collab-x">×</span>
+      <span>The Charlotte Coffee Festival</span>
+    </div>
+  </div>
+
+  <div class="stripe-bottom"></div>
+</div>
+
+<script>
+  const BANNER_W = 1080, BANNER_H = 1080;
+  const CELL_W   = 270;
+  const HORNETS_SRC = 'poster-assets/logos/hornets.png';
+  const TCCF_SRC    = 'assets/logo-primary-crema.png';
+  const HORNETS_SIZE = 162;
+  const TCCF_W = 214;
+  const TCCF_H = Math.round(214 / (738 / 350));
+
+  const ROWS = [
+    { type: 'logo',   h: 204, offset: false },
+    { type: 'logo',   h: 204, offset: true  },
+    { type: 'collab', h: 40                 },
+    { type: 'logo',   h: 252, offset: false },
+    { type: 'logo',   h: 252, offset: true  },
+    { type: 'collab', h: 40                 },
+    { type: 'logo',   h: 204, offset: false },
+    { type: 'logo',   h: 204, offset: true  },
+  ];
+
+  const COLS_BASE = Math.ceil(BANNER_W / CELL_W) + 2;
+  const grid = document.getElementById('logo-grid');
+  let currentY = -10;
+
+  ROWS.forEach(function(spec, rowIdx) {
+    if (spec.type === 'collab') {
+      const div = document.createElement('div');
+      div.style.cssText =
+        'position:absolute;display:flex;align-items:center;justify-content:center;gap:16px;' +
+        `top:${currentY}px;left:0;width:${BANNER_W}px;height:${spec.h}px;`;
+
+      const mk = function(text, color, size, tracking) {
+        const s = document.createElement('span');
+        s.textContent = text;
+        s.style.cssText =
+          `font-family:"Styrene B","Helvetica Neue",Helvetica,sans-serif;` +
+          `font-size:${size}px;letter-spacing:${tracking}em;` +
+          `text-transform:uppercase;color:${color};`;
+        return s;
+      };
+      div.appendChild(mk('Charlotte Hornets',       'rgba(235,229,219,0.18)', 8.5, 0.38));
+      div.appendChild(mk('×',                       'rgba(0,178,169,0.32)',   11,  0.05));
+      div.appendChild(mk('Charlotte Coffee Festival','rgba(235,229,219,0.18)', 8.5, 0.38));
+      grid.appendChild(div);
+      currentY += spec.h;
+      return;
+    }
+
+    const leftShift = spec.offset ? -CELL_W / 2 : 0;
+    const cols      = COLS_BASE + (spec.offset ? 1 : 0);
+    const row       = document.createElement('div');
+    row.style.cssText =
+      'position:absolute;display:flex;align-items:center;' +
+      `top:${currentY}px;left:${leftShift}px;`;
+
+    for (let c = 0; c < cols; c++) {
+      const isHornets = (rowIdx + c) % 2 === 0;
+      const cell = document.createElement('div');
+      cell.style.cssText =
+        `width:${CELL_W}px;height:${spec.h}px;` +
+        'display:flex;align-items:center;justify-content:center;flex-shrink:0;';
+
+      const img = document.createElement('img');
+      img.src = isHornets ? HORNETS_SRC : TCCF_SRC;
+      img.alt = isHornets ? 'Charlotte Hornets' : 'The Charlotte Coffee Festival';
+      img.draggable = false;
+      img.style.cssText = isHornets
+        ? `width:${HORNETS_SIZE}px;height:${HORNETS_SIZE}px;object-fit:contain;display:block;filter:drop-shadow(0 3px 14px rgba(0,0,0,0.6));`
+        : `width:${TCCF_W}px;height:${TCCF_H}px;object-fit:contain;display:block;filter:drop-shadow(0 1px 10px rgba(235,229,219,0.15));`;
+
+      cell.appendChild(img);
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+    currentY += spec.h;
+  });
+</script>
+
+<!-- Auto-print: wait for fonts + images before triggering dialog -->
+<script>
+addEventListener('load', function() {
+  (async function() {
+    try { await document.fonts.ready; } catch(e) {}
+    const imgs = Array.from(document.images).filter(function(i){ return !i.complete; });
+    await Promise.race([
+      Promise.allSettled(imgs.map(function(i){ return i.decode(); })),
+      new Promise(function(r){ setTimeout(r, 8000); })
+    ]);
+    setTimeout(function(){ window.print(); }, 600);
+  })();
+});
+</script>
+
+</body>
+</html>

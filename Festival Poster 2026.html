@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte Coffee Festival 2026 — Poster</title>
+  <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 56"><rect width="80" height="56" fill="#1a1a1a"/><text x="40" y="34" text-anchor="middle" fill="#c8b89a" font-size="16" font-family="serif">TCCF</text></svg></template>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #111;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px;
+    }
+
+    .stage {
+      transform-origin: top center;
+      flex-shrink: 0;
+    }
+
+    /* ── POSTER CANVAS ──────────────────────────────────────────── */
+    .poster {
+      width: 794px;
+      height: 1123px;
+      background: var(--tccf-black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── HERO PHOTO — full bleed behind everything ───────────────── */
+    .hero {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 38%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(0,0,0,0.78) 0%,
+          rgba(0,0,0,0.60) 22%,
+          rgba(0,0,0,0.32) 46%,
+          rgba(0,0,0,0.38) 58%,
+          rgba(0,0,0,0.72) 68%,
+          rgba(0,0,0,0.92) 76%,
+          rgba(0,0,0,1.00) 82%
+        );
+    }
+
+    /* Content layer sits above the photo */
+    .poster-inner {
+      position: relative;
+      z-index: 1;
+      height: 1123px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Zone that reserves space for the absolutely-positioned hero text */
+    .hero-text-zone {
+      position: relative;
+      height: 720px;
+      flex-shrink: 0;
+    }
+
+    /* Crest — top right */
+    .hero-crest {
+      position: absolute;
+      top: 28px;
+      right: 32px;
+      width: 68px;
+      filter: brightness(1.6);
+    }
+
+    /* Title — top left */
+    .hero-title {
+      position: absolute;
+      top: 68px;
+      left: 42px;
+      color: var(--tccf-crema);
+    }
+
+    .hero-title .script-the {
+      display: block;
+      font-family: var(--font-script);
+      font-style: italic;
+      font-size: 36px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .hero-title .main-title {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 92px;
+      line-height: 0.905;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* Date — bottom right of hero zone */
+    .hero-date {
+      position: absolute;
+      bottom: 38px;
+      right: 42px;
+      color: var(--tccf-crema);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      line-height: 1.55;
+      text-align: right;
+    }
+
+    /* 50+ Vendors — below title */
+    .hero-vendors {
+      position: absolute;
+      top: 460px;
+      left: 42px;
+      color: var(--tccf-crema);
+      font-family: var(--font-display);
+      font-size: 34px;
+      line-height: 1.05;
+      font-weight: 400;
+    }
+
+    /* ── INFO STRIP ─────────────────────────────────────────────── */
+    .info-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 17px 42px 15px;
+    }
+
+    .info-col {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      line-height: 1.55;
+      color: var(--tccf-crema);
+    }
+
+    .info-col.right { text-align: right; }
+
+    /* ── DIVIDER ────────────────────────────────────────────────── */
+    .rule {
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      margin: 0 42px;
+    }
+
+    /* ── SPONSORS ROW ───────────────────────────────────────────── */
+    .sponsors-row {
+      display: flex;
+      align-items: flex-start;
+      padding: 16px 42px 14px;
+    }
+
+    /* Shared column */
+    .sp-col {
+      flex: 1.0;
+    }
+
+    .sp-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tccf-crema);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      white-space: nowrap;
+    }
+
+    .sp-col.left .sp-label::after {
+      display: none;
+    }
+
+    .sp-col.right .sp-label {
+      justify-content: flex-end;
+    }
+
+    .sp-col.right .sp-label::before {
+      display: none;
+    }
+
+    .sp-col.left img {
+      max-height: 76px;
+      max-width: 140px;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+      filter: invert(1);
+      mix-blend-mode: normal;
+    }
+
+    .sp-col.right img {
+      max-height: 52px;
+      max-width: 160px;
+      object-fit: contain;
+      object-position: right center;
+      display: block;
+      margin-left: auto;
+      filter: invert(1);
+      mix-blend-mode: normal;
+    }
+
+    /* Features list — center */
+    .features-col {
+      flex: 1.05;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .features-list {
+      list-style: none;
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.22);
+    }
+
+    .features-list li {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      color: var(--tccf-crema);
+      text-align: center;
+    }
+
+    .features-list li::before {
+      display: none;
+    }
+
+    /* ── SUPPORTING PARTNERS ─────────────────────────────────────── */
+    .partners-section {
+      padding: 14px 42px 18px;
+    }
+
+    .partners-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tccf-crema);
+      margin-bottom: 14px;
+      white-space: nowrap;
+    }
+
+    .partners-header::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      row-gap: 14px;
+      column-gap: 8px;
+      align-items: center;
+    }
+
+    .partner-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .partner-logo img {
+      max-height: 34px;
+      max-width: 110px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: grayscale(1) invert(1);
+      mix-blend-mode: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="poster">
+
+      <!-- ── HERO PHOTO: full-bleed, sits behind everything ── -->
+      <div class="hero">
+        <img class="hero-photo" src="poster-assets/bg/c-crowd.jpg" alt="">
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- ── ALL CONTENT: floats above photo ── -->
+      <div class="poster-inner">
+
+        <!-- Hero text zone -->
+        <div class="hero-text-zone">
+          <img class="hero-crest" src="poster-assets/crest-crema.png" alt="TCCF">
+          <div class="hero-title">
+            <span class="script-the">The</span>
+            <span class="main-title">CHARLOTTE<br>COFFEE<br>FESTIVAL 2026</span>
+          </div>
+          <div class="hero-date">
+            September 12th,<br>9am to 2pm
+          </div>
+          <div class="hero-vendors">50+ Roasters,<br>Cafes and Creators</div>
+        </div>
+
+        <!-- ── INFO STRIP ── -->
+      <div class="info-strip">
+        <div class="info-col">
+          Tickets are live on<br>www.cltcoffeefestival.com
+        </div>
+        <div class="info-col right">
+          Lenny Boy Brewery<br>Charlotte, NC
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- ── SPONSORS ROW ── -->
+      <div class="sponsors-row">
+
+        <!-- Left: Presented By -->
+        <div class="sp-col left">
+          <div class="sp-label">Presented by</div>
+          <img src="poster-assets/logos/night-swim.png" alt="Night Swim Coffee">
+        </div>
+
+        <!-- Center: Feature bullets -->
+        <div class="features-col">
+          <ul class="features-list">
+            <li>UNLIMITED TASTINGS</li>
+            <li>LATTE ART THROWDOWN</li>
+            <li>PREMIUM MERCH AND PRIZES</li>
+            <li>INTERACTIVE EDUCATION SESSIONS</li>
+          </ul>
+        </div>
+
+        <!-- Right: Sponsored By -->
+        <div class="sp-col right">
+          <div class="sp-label">Sponsored by</div>
+          <img src="poster-assets/logos/maizly.png" alt="Maizly">
+        </div>
+
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- ── SUPPORTING PARTNERS ── -->
+      <div class="partners-section">
+        <div class="partners-header">Supporting Partners</div>
+        <div class="partners-grid">
+          <div class="partner-logo"><img src="poster-assets/logos/odeko.png" alt="Odeko"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/miir.png" alt="MiiR"></div>
+          <div class="partner-logo"><img src="uploads/trailblaze-clean.png" alt="Trail Blaze Coffee Academy" style="filter: none; max-height: 44px; max-width: 130px;"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/coffee-destiny.png" alt="Coffee Destiny"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/moccamaster.png" alt="Moccamaster"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/barista.png" alt="Barista Magazine"></div>
+          <div class="partner-logo"><img src="uploads/Victoria-Arduino.png" alt="Victoria Arduino" style="max-height: 48px; max-width: 140px;"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/hornets.png" alt="Charlotte Hornets"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/baratza.png" alt="Baratza"></div>
+          <div class="partner-logo"><img src="poster-assets/logos/charlotte-water.png" alt="Charlotte Water"></div>
+        </div>
+      </div>
+
+      </div><!-- /.poster-inner -->
+
+    </div>
+  </div>
+
+  <script>
+    function scalePoster() {
+      var stage = document.getElementById('stage');
+      var W = 794, H = 1123;
+      var vw = window.innerWidth - 64;
+      var vh = window.innerHeight - 64;
+      var scale = Math.min(vw / W, vh / H, 1);
+      stage.style.transform = 'scale(' + scale + ')';
+      stage.style.width = W + 'px';
+      stage.style.height = H + 'px';
+      document.body.style.minHeight = Math.ceil(H * scale + 64) + 'px';
+    }
+    scalePoster();
+    window.addEventListener('resize', scalePoster);
+  </script>
+</body>
+</html>

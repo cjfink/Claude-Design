@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="design_doc_mode" content="canvas">
+<title>Vendor Spotlight — Options</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  .frame-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.42);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    font-size: 9px; font-family: var(--font-mono);
+    text-decoration: none; flex-shrink: 0;
+  }
+  .card-wrap {
+    width: 540px; height: 675px;
+    overflow: hidden; border-radius: 6px;
+    box-shadow: 0 20px 60px -12px rgba(0,0,0,0.7);
+  }
+  .inner {
+    width: 1080px; height: 1350px;
+    transform: scale(0.5); transform-origin: top left;
+    position: relative; overflow: hidden;
+  }
+</style>
+</head>
+<body>
+<script>
+const V = [
+  { id:'1a', label:'Olive', sub:'Reference',    x:60,  y:60,
+    bg:'#929070',  fg:'#181818', rule:'#746137',
+    fb:'rgba(24,24,24,0.17)', fo:0.62,
+    sf:'', ph:'rgba(24,24,24,0.12)', pd:'rgba(0,0,0,0.06)' },
+
+  { id:'1b', label:'Crema', sub:'Light & airy',  x:660, y:60,
+    bg:'#EBE5DB',  fg:'#181818', rule:'#4A4B35',
+    fb:'rgba(24,24,24,0.13)', fo:0.58,
+    sf:'', ph:'rgba(24,24,24,0.08)', pd:'rgba(0,0,0,0.04)' },
+
+  { id:'1c', label:'Forest', sub:'Deep & moody', x:60,  y:820,
+    bg:'#4A4B35',  fg:'#EBE5DB', rule:'rgba(235,229,219,0.45)',
+    fb:'rgba(235,229,219,0.15)', fo:0.58,
+    sf:'brightness(0) invert(0.9)', ph:'rgba(0,0,0,0.28)', pd:'rgba(255,255,255,0.03)' },
+
+  { id:'1d', label:'Noir', sub:'Bold & editorial', x:660, y:820,
+    bg:'#181818',  fg:'#EBE5DB', rule:'#AA7050',
+    fb:'rgba(235,229,219,0.12)', fo:0.55,
+    sf:'brightness(0) invert(0.88)', ph:'rgba(255,255,255,0.07)', pd:'rgba(255,255,255,0.025)' }
+];
+
+V.forEach(v => {
+  const sec = document.createElement('section');
+  sec.id = v.id;
+  sec.style.cssText = `position:absolute;top:${v.y}px;left:${v.x}px;width:540px;`;
+
+  const lbl = document.createElement('div');
+  lbl.className = 'frame-label';
+  lbl.innerHTML = `<a class="badge" href="#${v.id}">${v.id}</a>${v.label}<span style="opacity:.5">— ${v.sub}</span>`;
+  sec.appendChild(lbl);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap';
+
+  const inner = document.createElement('div');
+  inner.className = 'inner';
+  inner.style.background = v.bg;
+
+  inner.innerHTML = `
+<img src="assets/tccf-stamp-circle.png" style="position:absolute;top:50px;right:54px;width:112px;height:112px;opacity:.86;z-index:3;${v.sf?'filter:'+v.sf+';':''}">
+
+<div style="position:absolute;top:154px;left:68px;display:flex;align-items:center;gap:14px;z-index:2;">
+  <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+    <circle cx="19" cy="19" r="17.75" stroke="${v.fg}" stroke-width="1.5"/>
+    <line x1="12" y1="19" x2="26" y2="19" stroke="${v.fg}" stroke-width="1.5" stroke-linecap="round"/>
+    <polyline points="20,13 26,19 20,25" stroke="${v.fg}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </svg>
+  <span style="font-family:var(--font-mono);font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:${v.fg};">Vendor Spotlight</span>
+</div>
+
+<div style="position:absolute;top:212px;left:68px;right:68px;font-family:var(--font-display);font-size:152px;line-height:.875;letter-spacing:-.015em;text-transform:uppercase;color:${v.fg};z-index:2;">VENDOR<br>NAME</div>
+
+<div style="position:absolute;top:498px;left:68px;width:360px;height:1.5px;background:${v.rule};z-index:2;"></div>
+
+<p style="position:absolute;top:542px;left:68px;right:68px;max-width:700px;font-family:var(--font-body);font-size:26px;line-height:1.4;color:${v.fg};opacity:.88;z-index:2;">A brief description about this vendor — who they are, what they make, and why we love having them at TCCF.</p>
+
+<div style="position:absolute;top:752px;left:68px;right:68px;height:462px;border-radius:18px;overflow:hidden;z-index:2;background:${v.ph};background-image:repeating-linear-gradient(45deg,${v.pd} 0,${v.pd} 1px,transparent 1px,transparent 10px);">
+  <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" opacity=".22">
+      <rect x="5" y="15" width="46" height="32" rx="6" stroke="${v.fg}" stroke-width="2.5"/>
+      <circle cx="28" cy="30" r="9" stroke="${v.fg}" stroke-width="2.5"/>
+      <path d="M20 15v-3a2 2 0 012-2h12a2 2 0 012 2v3" stroke="${v.fg}" stroke-width="2.5"/>
+    </svg>
+  </div>
+</div>
+
+<div style="position:absolute;bottom:0;left:0;right:0;height:84px;border-top:1.5px solid ${v.fb};display:flex;align-items:center;justify-content:center;gap:16px;padding:0 68px;z-index:2;">
+  ${['September 12, 2026','Lenny Boy Brewery','Charlotte, NC','9am – 2pm'].map(t =>
+    `<span style="font-family:var(--font-mono);font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:${v.fg};opacity:${v.fo};white-space:nowrap;">${t}</span>`
+  ).join(`<span style="width:4px;height:4px;border-radius:50%;background:${v.fg};opacity:.28;flex-shrink:0;"></span>`)}
+</div>`;
+
+  wrap.appendChild(inner);
+  sec.appendChild(wrap);
+  document.body.appendChild(sec);
+});
+</script>
+</body>
+</html>

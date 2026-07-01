@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF — Merch Mockups</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--tccf-crema);
+    color: var(--tccf-black);
+  }
+
+  /* paper grain — extremely subtle */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 80px);
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-6);
+    padding: clamp(48px, 8vh, 96px) 0 var(--s-7);
+    flex-wrap: wrap;
+  }
+  .masthead .lede { max-width: 30ch; color: var(--tccf-latte); }
+  .mast-title { margin: var(--s-3) 0 0; }
+  .mast-title .script {
+    display: block;
+    font-size: var(--fs-2xl);
+    line-height: 0.8;
+    margin-left: -2px;
+    color: var(--tccf-latte);
+  }
+  .mast-logo { width: 220px; height: auto; flex-shrink: 0; }
+
+  .hr {
+    height: 0;
+    border: none;
+    border-top: var(--bw-rule) solid var(--tccf-black);
+    margin: 0;
+  }
+
+  /* ---------- Section ---------- */
+  .section { padding: var(--s-9) 0; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+    margin-bottom: var(--s-8);
+    max-width: 60ch;
+  }
+  .section-head .eyebrow { color: var(--tccf-coral); }
+  .section-head h2 { margin: 0; }
+  .section-head .lede { color: var(--tccf-latte); margin: var(--s-1) 0 0; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6);
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .masthead { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ---------- Mockup card ---------- */
+  .card {
+    border: var(--bw-hair) solid var(--tccf-black);
+    background: var(--tccf-off-white);
+    display: flex;
+    flex-direction: column;
+  }
+  .stage {
+    flex: 1;
+    min-height: 420px;
+    display: grid;
+    place-items: center;
+    padding: var(--s-8) var(--s-6);
+    position: relative;
+    overflow: hidden;
+  }
+  /* floor line under product */
+  .stage::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 18%;
+    height: 1px;
+    background: rgba(24,24,24,0.08);
+  }
+  .caption {
+    border-top: var(--bw-hair) solid var(--tccf-black);
+    padding: var(--s-4) var(--s-5);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .caption .idx {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    font-size: var(--fs-sm);
+  }
+  .caption .spec {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--tracking-stamp);
+    text-transform: uppercase;
+    color: var(--tccf-latte);
+    text-align: right;
+  }
+  .swatch {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border: 1px solid var(--tccf-black);
+    margin-right: 6px;
+    transform: translateY(1px);
+  }
+
+  /* =========================================================
+     4 OZ PAPER CUP
+     ========================================================= */
+  .cup {
+    position: relative;
+    width: 188px;
+    filter: drop-shadow(0 20px 26px rgba(24,24,24,0.22));
+  }
+  .cup-rim {
+    position: relative;
+    width: 188px;
+    height: 30px;
+    border-radius: 50%;
+    z-index: 3;
+  }
+  .cup-rim-inner {
+    position: absolute;
+    inset: 5px 9px auto 9px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  .cup-body {
+    position: relative;
+    width: 188px;
+    height: 158px;
+    margin-top: -15px;
+    clip-path: polygon(3% 0, 97% 0, 85% 100%, 15% 100%);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .cup-body .art {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -48%);
+    width: 64%;
+    z-index: 2;
+  }
+  /* cylindrical shading */
+  .cup-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg,
+      rgba(24,24,24,0.16) 0%,
+      rgba(24,24,24,0) 22%,
+      rgba(255,255,255,0.10) 50%,
+      rgba(24,24,24,0) 78%,
+      rgba(24,24,24,0.18) 100%);
+  }
+
+  /* crema cup */
+  .cup--crema .cup-rim { background: #ded6c7; box-shadow: inset 0 2px 0 #fff, inset 0 -3px 5px rgba(24,24,24,0.18); }
+  .cup--crema .cup-rim-inner { background: #c9bfac; box-shadow: inset 0 3px 4px rgba(24,24,24,0.28); }
+  .cup--crema .cup-body { background: var(--tccf-crema); }
+  /* black cup */
+  .cup--black .cup-rim { background: #2a2a2a; box-shadow: inset 0 2px 0 rgba(255,255,255,0.12), inset 0 -3px 5px rgba(0,0,0,0.5); }
+  .cup--black .cup-rim-inner { background: #0d0d0d; box-shadow: inset 0 3px 5px rgba(0,0,0,0.7); }
+  .cup--black .cup-body { background: var(--tccf-black); }
+  .cup--black .cup-body::before {
+    background: linear-gradient(90deg,
+      rgba(0,0,0,0.45) 0%,
+      rgba(0,0,0,0) 24%,
+      rgba(255,255,255,0.08) 50%,
+      rgba(0,0,0,0) 76%,
+      rgba(0,0,0,0.5) 100%);
+  }
+
+  /* =========================================================
+     TOTE BAG
+     ========================================================= */
+  .tote {
+    position: relative;
+    width: 260px;
+    padding-top: 86px;
+    filter: drop-shadow(0 22px 28px rgba(24,24,24,0.22));
+  }
+  .tote-handle {
+    position: absolute;
+    top: 0;
+    width: 74px;
+    height: 120px;
+    border-style: solid;
+    border-width: 11px 11px 0 11px;
+    border-radius: 46px 46px 0 0;
+    background: transparent;
+    z-index: 1;
+  }
+  .tote-handle.l { left: 42px; }
+  .tote-handle.r { right: 42px; }
+  .tote-body {
+    position: relative;
+    width: 260px;
+    height: 268px;
+    border-radius: 3px 3px 5px 5px;
+    overflow: hidden;
+    z-index: 2;
+  }
+  .tote-body .art {
+    position: absolute;
+    top: 47%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 66%;
+    z-index: 3;
+  }
+  /* top hem */
+  .tote-body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 16px;
+    z-index: 2;
+  }
+  /* fabric shading + side seams */
+  .tote-body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(24,24,24,0.10), rgba(24,24,24,0) 14%, rgba(24,24,24,0) 86%, rgba(24,24,24,0.12)),
+      linear-gradient(180deg, rgba(255,255,255,0.06), rgba(24,24,24,0.05));
+  }
+
+  /* natural canvas */
+  .tote--natural .tote-handle { border-color: #cabfa6; }
+  .tote--natural .tote-body { background: #d8cdb5; }
+  .tote--natural .tote-body::before { background: #cdc1a6; box-shadow: 0 1px 0 rgba(24,24,24,0.18); }
+  /* forest */
+  .tote--forest .tote-handle { border-color: #3e3f2c; }
+  .tote--forest .tote-body { background: var(--tccf-forest); }
+  .tote--forest .tote-body::before { background: #41422f; box-shadow: 0 1px 0 rgba(0,0,0,0.3); }
+
+  /* =========================================================
+     T-SHIRT
+     ========================================================= */
+  .tee {
+    position: relative;
+    width: 320px;
+    height: 300px;
+    filter: drop-shadow(0 22px 26px rgba(24,24,24,0.20));
+  }
+  .tee-body {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(
+      34% 5%, 42% 5%, 45% 12%, 50% 14%, 55% 12%, 58% 5%, 66% 5%,
+      93% 19%, 84% 39%, 70% 30%,
+      74% 97%, 26% 97%, 30% 30%,
+      16% 39%, 7% 19%
+    );
+    z-index: 1;
+  }
+  .tee-body .art {
+    position: absolute;
+    z-index: 3;
+  }
+  /* art: centre chest */
+  .tee--centre .art {
+    top: 46%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+  }
+  /* art: left chest */
+  .tee--lchest .art {
+    top: 27%; left: 36%;
+    transform: translate(-50%, -50%);
+    width: 27%;
+  }
+  /* collar */
+  .tee-collar {
+    position: absolute;
+    top: 3.5%; left: 50%;
+    transform: translateX(-50%);
+    width: 68px; height: 30px;
+    border: 4px solid;
+    border-radius: 50%;
+    clip-path: inset(42% 0 0 0);
+    z-index: 2;
+  }
+  /* fabric shading + sleeve break lines */
+  .tee-body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(90deg, rgba(24,24,24,0.12), rgba(24,24,24,0) 18%, rgba(24,24,24,0) 82%, rgba(24,24,24,0.13)),
+      radial-gradient(120% 80% at 50% 8%, rgba(255,255,255,0.10), rgba(24,24,24,0) 55%);
+  }
+
+  /* black tee */
+  .tee--black .tee-body { background: var(--tccf-black); }
+  .tee--black .tee-collar { border-color: #2c2c2c; }
+  /* sage / muted tee */
+  .tee--sage .tee-body { background: var(--tccf-muted); }
+  .tee--sage .tee-collar { border-color: #a8a283; }
+  .tee--sage .tee-body::after {
+    background:
+      linear-gradient(90deg, rgba(24,24,24,0.10), rgba(24,24,24,0) 18%, rgba(24,24,24,0) 82%, rgba(24,24,24,0.12)),
+      radial-gradient(120% 80% at 50% 8%, rgba(255,255,255,0.14), rgba(24,24,24,0) 55%);
+  }
+
+  footer {
+    padding: var(--s-8) 0 var(--s-9);
+    text-align: center;
+  }
+  footer .mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: var(--tracking-stamp);
+    text-transform: uppercase;
+    color: var(--tccf-latte);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead" data-screen-label="Masthead">
+    <div>
+      <span class="eyebrow">Brand Merchandise · Mockups</span>
+      <h2 class="mast-title"><span class="script">The</span>Festival Merch</h2>
+    </div>
+    <img class="mast-logo" src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+  </header>
+  <hr class="hr">
+
+  <!-- ============ 4 OZ PAPER CUP ============ -->
+  <section class="section" data-screen-label="4oz Paper Cup">
+    <div class="section-head">
+      <span class="eyebrow">Merch · Drinkware</span>
+      <h2>4 oz Paper Cup</h2>
+      <p class="lede">Single-wall tasting cup for the pour stations. Black-on-crema as the house standard, with a deep black run for the espresso bar.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="stage">
+          <div class="cup cup--crema">
+            <div class="cup-rim"><div class="cup-rim-inner"></div></div>
+            <div class="cup-body">
+              <img class="art" src="assets/lockup-black.png" alt="TCCF circular stamp">
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="idx">01 — Crema</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-crema)"></span>Single wall · circular stamp</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stage">
+          <div class="cup cup--black">
+            <div class="cup-rim"><div class="cup-rim-inner"></div></div>
+            <div class="cup-body">
+              <img class="art" src="assets/logo-primary-crema.png" alt="TCCF crest lockup">
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="idx">02 — Black</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-black)"></span>Single wall · crest lockup</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="hr">
+
+  <!-- ============ TOTE BAG ============ -->
+  <section class="section" data-screen-label="Tote Bag">
+    <div class="section-head">
+      <span class="eyebrow">Merch · Carry</span>
+      <h2>Tote Bag</h2>
+      <p class="lede">12 oz cotton canvas with the crest centred on the front. Roomy enough for a few bags of beans and a folded program.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="stage">
+          <div class="tote tote--natural">
+            <div class="tote-handle l"></div>
+            <div class="tote-handle r"></div>
+            <div class="tote-body">
+              <img class="art" src="assets/logo-primary-black.png" alt="TCCF crest lockup">
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="idx">01 — Natural Canvas</span>
+          <span class="spec"><span class="swatch" style="background:#d8cdb5"></span>Crest lockup · front</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stage">
+          <div class="tote tote--forest">
+            <div class="tote-handle l"></div>
+            <div class="tote-handle r"></div>
+            <div class="tote-body">
+              <img class="art" src="assets/lockup-crema.png" alt="TCCF circular stamp">
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="idx">02 — Forest</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-forest)"></span>Circular stamp · front</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="hr">
+
+  <!-- ============ T-SHIRT ============ -->
+  <section class="section" data-screen-label="T-Shirt">
+    <div class="section-head">
+      <span class="eyebrow">Merch · Apparel</span>
+      <h2>T-Shirt</h2>
+      <p class="lede">Soft heavyweight cotton. A big chest stamp for the crowd; a quieter left-chest crest for staff and volunteers.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="stage">
+          <div class="tee tee--black tee--centre">
+            <div class="tee-body">
+              <div class="tee-collar"></div>
+              <img class="art" src="assets/lockup-crema.png" alt="TCCF circular stamp">
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="idx">01 — Black</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-black)"></span>Circular stamp · centre chest</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stage">
+          <div class="tee tee--sage tee--lchest">
+            <div class="tee-body">
+              <div class="tee-collar"></div>
+              <img class="art" src="assets/logo-primary-black.png" alt="TCCF crest lockup">
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <span class="idx">02 — Sage</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-muted)"></span>Crest lockup · left chest</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="hr">
+
+  <footer>
+    <p class="mono">Made in Charlotte · Brewed with intent · TCCF</p>
+  </footer>
+
+</div>
+</body>
+</html>

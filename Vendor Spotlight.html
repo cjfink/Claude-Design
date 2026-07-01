@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Spotlight — TCCF 2026</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="image-slot.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #0e0d0b; }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 24px 24px 48px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hint {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.32);
+    text-align: center;
+  }
+
+  #stage {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  /* ── Canvas ────────────────────────────────── */
+  .post {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    transform-origin: top center;
+    background: #929070;
+    box-shadow: 0 28px 72px -18px rgba(0,0,0,0.85);
+    flex-shrink: 0;
+  }
+
+  /* ── TCCF Stamp ────────────────────────────── */
+  .stamp {
+    position: absolute;
+    top: 50px;
+    right: 54px;
+    width: 112px;
+    height: 112px;
+    z-index: 3;
+    opacity: 0.86;
+  }
+
+  /* ── Eyebrow row ───────────────────────────── */
+  .eyebrow-row {
+    position: absolute;
+    top: 154px;
+    left: 68px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 2;
+    user-select: none;
+  }
+  .eyebrow-label {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--tccf-black);
+  }
+
+  /* ── Vendor name ───────────────────────────── */
+  .vendor-name {
+    position: absolute;
+    top: 212px;
+    left: 68px;
+    right: 68px;
+    font-family: var(--font-display);
+    font-size: 152px;
+    line-height: 0.875;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--tccf-black);
+    font-weight: 400;
+    word-break: break-word;
+    z-index: 2;
+  }
+  .vendor-name[contenteditable]:focus,
+  .vendor-bio[contenteditable]:focus {
+    outline: 2px solid rgba(24,24,24,0.22);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
+  .vendor-name[contenteditable]:empty::before,
+  .vendor-bio[contenteditable]:empty::before {
+    content: attr(data-placeholder);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* ── Rule ──────────────────────────────────── */
+  .rule {
+    position: absolute;
+    top: 498px;
+    left: 68px;
+    width: 360px;
+    height: 1.5px;
+    background: var(--tccf-latte);
+    z-index: 2;
+  }
+
+  /* ── Vendor bio ────────────────────────────── */
+  .vendor-bio {
+    position: absolute;
+    top: 542px;
+    left: 68px;
+    right: 68px;
+    max-width: 700px;
+    font-family: var(--font-body);
+    font-size: 26px;
+    line-height: 1.40;
+    color: var(--tccf-black);
+    z-index: 2;
+  }
+
+  /* ── Photo zone ────────────────────────────── */
+  .photo-zone {
+    position: absolute;
+    top: 752px;
+    left: 68px;
+    right: 68px;
+    height: 462px;
+    border-radius: 18px;
+    overflow: hidden;
+    z-index: 2;
+    background: rgba(24,24,24,0.14);
+  }
+  .photo-zone image-slot {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── Festival footer ───────────────────────── */
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 84px;
+    border-top: 1.5px solid rgba(24,24,24,0.17);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 0 68px;
+    z-index: 2;
+  }
+  .ft {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--tccf-black);
+    opacity: 0.62;
+    white-space: nowrap;
+  }
+  .ft-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--tccf-black);
+    opacity: 0.30;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<p class="hint">Click vendor name or bio to edit &nbsp;·&nbsp; Drag a photo into the image area &nbsp;·&nbsp; 1080 × 1350 px</p>
+<div id="stage">
+  <div class="post" id="post">
+
+    <!-- TCCF stamp -->
+    <img class="stamp" src="assets/tccf-stamp-circle.png" alt="The Charlotte Coffee Festival">
+
+    <!-- Eyebrow -->
+    <div class="eyebrow-row">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="17.75" stroke="#181818" stroke-width="1.5"/>
+        <line x1="12" y1="19" x2="26" y2="19" stroke="#181818" stroke-width="1.5" stroke-linecap="round"/>
+        <polyline points="20,13 26,19 20,25" fill="none" stroke="#181818" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="eyebrow-label">Vendor Spotlight</span>
+    </div>
+
+    <!-- Vendor name — click to edit -->
+    <div
+      class="vendor-name"
+      contenteditable="true"
+      spellcheck="false"
+      data-placeholder="VENDOR NAME"
+    >VENDOR<br>NAME</div>
+
+    <!-- Rule -->
+    <div class="rule"></div>
+
+    <!-- Bio — click to edit -->
+    <p
+      class="vendor-bio"
+      contenteditable="true"
+      spellcheck="false"
+      data-placeholder="Vendor description goes here."
+    >A brief, compelling description about this vendor — who they are, what they bring, and why we love having them at TCCF.</p>
+
+    <!-- Vendor photo drop zone -->
+    <div class="photo-zone">
+      <image-slot
+        id="vendor-photo"
+        placeholder="Drop vendor photo here"
+        shape="rect"
+        fit="cover"
+      ></image-slot>
+    </div>
+
+    <!-- Festival details footer -->
+    <div class="footer">
+      <span class="ft">September 12, 2026</span>
+      <span class="ft-dot"></span>
+      <span class="ft">Lenny Boy Brewery</span>
+      <span class="ft-dot"></span>
+      <span class="ft">Charlotte, NC</span>
+      <span class="ft-dot"></span>
+      <span class="ft">9am – 2pm</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function scalePost() {
+    var post = document.getElementById('post');
+    var stage = document.getElementById('stage');
+    var W = 1080, H = 1350;
+    var vw = window.innerWidth - 48;
+    var vh = window.innerHeight - 80;
+    var scale = Math.min(vw / W, vh / H, 1);
+    post.style.transform = 'scale(' + scale + ')';
+    post.style.transformOrigin = 'top center';
+    stage.style.width = Math.round(W * scale) + 'px';
+    stage.style.height = Math.round(H * scale) + 'px';
+  }
+  scalePost();
+  window.addEventListener('resize', scalePost);
+</script>
+</body>
+</html>

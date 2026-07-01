@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Merch Teaser" subtitle="Website teaser — real product photos + navy cut-out hero" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF — Merch, Incoming</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--tccf-crema); color: var(--tccf-black); overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); }
+
+  /* film grain */
+  .grain::after {
+    content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between;
+    padding: var(--s-4) clamp(24px, 5vw, 72px); border-bottom: var(--bw-hair) solid var(--tccf-black);
+  }
+  .topbar img { height: 30px; }
+  .topbar .nav { display: flex; gap: var(--s-5); align-items: center; }
+  .topbar .nav span { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); }
+  .topbar .pill {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase;
+    border: var(--bw-hair) solid var(--tccf-black); border-radius: var(--r-pill); padding: 7px 16px; color: var(--tccf-black);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; border-bottom: var(--bw-rule) solid var(--tccf-black); overflow: hidden; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: var(--s-7); align-items: center; min-height: 80vh; padding-top: var(--s-8); padding-bottom: var(--s-8); }
+  .hero-copy .eyebrow { color: var(--tccf-coral); }
+  .hero-copy .script { display: block; font-size: var(--fs-2xl); line-height: 1; color: var(--tccf-latte); margin: var(--s-5) 0 var(--s-1); }
+  .hero-copy h1 { margin: 0; font-size: clamp(56px, 9vw, 116px); line-height: 0.9; letter-spacing: var(--tracking-tight); }
+  .hero-copy .lede { max-width: 40ch; margin: var(--s-5) 0 var(--s-6); color: var(--tccf-latte); }
+  .hero-actions { display: flex; gap: var(--s-4); align-items: center; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--font-display); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--fs-sm);
+    background: var(--tccf-black); color: var(--tccf-crema); border: var(--bw-rule) solid var(--tccf-black);
+    padding: 14px 28px; cursor: pointer; transition: all 160ms cubic-bezier(0.2,0.7,0.2,1); text-decoration: none; display: inline-block;
+  }
+  .btn:hover { background: transparent; color: var(--tccf-black); }
+  .btn--ghost { background: transparent; color: var(--tccf-black); }
+  .btn--ghost:hover { background: var(--tccf-black); color: var(--tccf-crema); }
+
+  .hero-visual { position: relative; display: grid; place-items: center; min-height: 460px; }
+  .hero-visual .disc {
+    position: absolute; width: 104%; aspect-ratio: 1; border-radius: 50%; background: var(--tccf-muted); opacity: 0.26; z-index: 0;
+    -webkit-mask: radial-gradient(circle, #000 60%, transparent 71%); mask: radial-gradient(circle, #000 60%, transparent 71%);
+  }
+  .hero-visual .photo-frame {
+    position: relative; z-index: 1; width: 100%; max-width: 520px;
+    background: var(--tccf-off-white); border: var(--bw-rule) solid var(--tccf-black);
+    padding: 12px 12px 0; transform: rotate(-1.6deg);
+    box-shadow: 0 34px 46px rgba(20,18,14,0.30);
+  }
+  .hero-visual .photo-frame img { width: 100%; display: block; }
+  .hero-visual .photo-frame .cap {
+    display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4);
+    padding: 12px 4px 14px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte);
+  }
+  .hero-visual .photo-frame .cap b { color: var(--tccf-black); font-weight: 400; }
+  .hero-visual .tag {
+    position: absolute; z-index: 2; right: -3%; top: 5%;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase;
+    background: var(--tccf-coral); color: var(--tccf-off-white); padding: 8px 14px; transform: rotate(3deg);
+    box-shadow: 0 8px 18px rgba(20,18,14,0.22);
+  }
+
+  /* ---------- Marquee ---------- */
+  .marquee { background: var(--tccf-black); color: var(--tccf-crema); overflow: hidden; border-bottom: var(--bw-rule) solid var(--tccf-black); }
+  .marquee .track { display: flex; gap: var(--s-6); white-space: nowrap; padding: var(--s-4) 0; animation: scroll 26s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-lg); letter-spacing: var(--tracking-wide); display: inline-flex; align-items: center; gap: var(--s-6); }
+  .marquee b { color: var(--tccf-muted); font-weight: 400; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---------- Festival details band ---------- */
+  .details { border-bottom: var(--bw-rule) solid var(--tccf-black); background: var(--tccf-off-white); }
+  .details .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; padding-left: 0; padding-right: 0; }
+  .details .cell { padding: var(--s-6) clamp(24px, 4vw, 48px); border-right: var(--bw-hair) solid var(--tccf-black); display: flex; flex-direction: column; gap: var(--s-2); }
+  .details .cell:last-child { border-right: none; }
+  .details .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-coral); }
+  .details .v { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(22px, 2.4vw, 32px); line-height: 1; letter-spacing: 0.01em; }
+  .details .s { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); }
+
+  /* ---------- Lookbook ---------- */
+  .drop { padding: clamp(56px, 9vh, 120px) 0; }
+  .drop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-7); flex-wrap: wrap; }
+  .drop-head .eyebrow { color: var(--tccf-coral); display: block; margin-bottom: var(--s-2); }
+  .drop-head h2 { margin: 0; font-size: clamp(36px, 5vw, 64px); }
+  .drop-head p { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); margin: 0; }
+
+  .lookbook { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--s-5); }
+  .item { position: relative; border: var(--bw-hair) solid var(--tccf-black); background: var(--tccf-off-white); overflow: hidden; display: flex; flex-direction: column; }
+  .item .frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; }
+  .item .frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.96) contrast(1.03); transition: transform 600ms cubic-bezier(0.2,0.7,0.2,1); }
+  .item:hover .frame img { transform: scale(1.04); }
+  .item .soon {
+    position: absolute; z-index: 3; left: var(--s-4); top: var(--s-4);
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-stamp); text-transform: uppercase;
+    background: rgba(24,24,24,0.82); color: var(--tccf-crema); padding: 6px 11px; backdrop-filter: blur(4px);
+  }
+  .item .meta { padding: var(--s-4) var(--s-5) var(--s-5); border-top: var(--bw-hair) solid var(--tccf-black); display: flex; flex-direction: column; gap: 4px; }
+  .item .meta .n { font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-lg); line-height: 1; letter-spacing: 0.01em; }
+  .item .meta .d { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); }
+  .item .meta .access { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-coral); margin-top: var(--s-2); }
+
+  /* spans */
+  .col-6 { grid-column: span 6; }
+  .col-3 { grid-column: span 3; }
+  .item--tall .frame { aspect-ratio: 4 / 5; }
+  .item--wide .frame { aspect-ratio: 16 / 12; }
+
+  /* ---------- Signup ---------- */
+  .signup { background: var(--tccf-forest); color: var(--tccf-crema); border-top: var(--bw-rule) solid var(--tccf-black); border-bottom: var(--bw-rule) solid var(--tccf-black); }
+  .signup .wrap { padding: clamp(56px, 9vh, 110px) clamp(24px,5vw,72px); display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s-7); align-items: center; }
+  .signup .eyebrow { color: var(--tccf-muted); }
+  .signup h2 { margin: var(--s-3) 0 var(--s-3); font-size: clamp(40px, 6vw, 80px); line-height: 0.92; color: var(--tccf-off-white); }
+  .signup .script { font-family: var(--font-script); font-style: italic; font-weight: 700; text-transform: none; color: var(--tccf-muted); }
+  .signup p { color: rgba(235,229,219,0.78); max-width: 38ch; margin: 0; }
+  .signup .fest-facts { display: flex; gap: var(--s-7); margin-top: var(--s-6); flex-wrap: wrap; }
+  .signup .fest-facts .k { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-muted); margin-bottom: 6px; }
+  .signup .fest-facts .v { display: block; font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-lg); line-height: 1.05; color: var(--tccf-off-white); }
+  .form { display: flex; gap: var(--s-3); margin-top: var(--s-4); flex-wrap: wrap; }
+  .form input {
+    flex: 1; min-width: 220px; background: transparent; border: var(--bw-rule) solid var(--tccf-muted); color: var(--tccf-crema);
+    padding: 14px 18px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.02em;
+  }
+  .form input::placeholder { color: rgba(235,229,219,0.5); text-transform: uppercase; letter-spacing: var(--tracking-stamp); font-size: 11px; }
+  .form .btn { background: var(--tccf-crema); color: var(--tccf-black); border-color: var(--tccf-crema); }
+  .form .btn:hover { background: transparent; color: var(--tccf-crema); }
+  .signup small { display: block; margin-top: var(--s-3); font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: rgba(235,229,219,0.55); }
+  .signup-mark { display: grid; place-items: center; }
+  .signup-mark img { width: min(280px, 70%); opacity: 0.96; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: var(--s-7) 0; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap; }
+  footer img { height: 34px; }
+  footer .mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: var(--s-6); min-height: 0; }
+    .hero-visual { order: -1; }
+    .signup .wrap { grid-template-columns: 1fr; }
+    .signup-mark { display: none; }
+    .col-6, .col-3 { grid-column: span 6; }
+    .topbar .nav span { display: none; }
+    .details .wrap { grid-template-columns: 1fr; }
+    .details .cell { border-right: none; border-bottom: var(--bw-hair) solid var(--tccf-black); }
+    .details .cell:last-child { border-bottom: none; }
+  }
+  @media (max-width: 560px) {
+    .col-6, .col-3 { grid-column: span 12; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <img src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+    <div class="nav">
+      <span>Sept 12 · Lenny Boy Brewing</span>
+      <a class="pill" href="#tickets">Tickets live now →</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero grain" data-screen-label="Hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">The Charlotte Coffee Festival · Merch</span>
+        <span class="script">A first look at</span>
+        <h1>THE<br>MERCH<br>DROP</h1>
+        <p class="lede">Cups, totes &amp; tees — all of it lives at the festival. A celebration of coffee &amp; the people that shape it.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#tickets">Get tickets</a>
+          <a class="btn btn--ghost" href="#lookbook">See the merch ↓</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="disc"></div>
+        <figure class="photo-frame">
+          <img src="assets/hero-tees-kitchen.png" alt="Two baristas wearing the navy and white Charlotte Coffee Festival tees, back print, in a kitchen">
+          <figcaption class="cap"><span><b>Festival Tees</b> · Navy &amp; White</span><span>Back print</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FESTIVAL DETAILS BAND -->
+  <section class="details" data-screen-label="Festival details band">
+    <div class="wrap">
+      <div class="cell">
+        <span class="k">Where</span>
+        <span class="v">Lenny Boy Brewing Co.</span>
+        <span class="s">Charlotte, NC</span>
+      </div>
+      <div class="cell">
+        <span class="k">When</span>
+        <span class="v">Sat, Sept 12</span>
+        <span class="s">9 AM – 2 PM</span>
+      </div>
+      <div class="cell">
+        <span class="k">Admission</span>
+        <span class="v">Tickets Live Now</span>
+        <span class="s">VIP · Early GA · GA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Coffee <b>&amp;</b> Community</span><span>·</span>
+      <span>Lenny Boy Brewing</span><span>·</span>
+      <span>Sat Sept 12 <b>·</b> 9–2</span><span>·</span>
+      <span>Tickets Live Now</span><span>·</span>
+      <span>Coffee <b>&amp;</b> Community</span><span>·</span>
+      <span>Lenny Boy Brewing</span><span>·</span>
+      <span>Sat Sept 12 <b>·</b> 9–2</span><span>·</span>
+      <span>Tickets Live Now</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- LOOKBOOK -->
+  <section class="drop" id="lookbook" data-screen-label="Lookbook">
+    <div class="wrap">
+      <div class="drop-head">
+        <div>
+          <span class="eyebrow">At the festival</span>
+          <h2>What's at the fest.</h2>
+        </div>
+        <p>04 pieces · All at the festival</p>
+      </div>
+
+      <div class="lookbook">
+
+        <!-- Tote (wide hero card) -->
+        <article class="item col-6 item--wide" data-screen-label="Tote card">
+          <div class="frame">
+            <img src="assets/photo-tote.jpg" alt="TCCF natural canvas tote bag">
+          </div>
+          <div class="meta">
+            <span class="n">Canvas Tote</span>
+            <span class="d">Natural cotton · tagline badge · presented by Night Swim</span>
+            <span class="access">Included with VIP &amp; Early GA admission</span>
+          </div>
+        </article>
+
+        <!-- Cup -->
+        <article class="item col-6 item--wide" data-screen-label="Cup card">
+          <div class="frame">
+            <img src="assets/photo-cup.jpg" alt="TCCF 4 oz kraft cup" style="object-position: center 42%;">
+          </div>
+          <div class="meta">
+            <span class="n">4 oz Cup</span>
+            <span class="d">Single-wall kraft · crown crest · black lid</span>
+            <span class="access">Free coffee samples for every attendee</span>
+          </div>
+        </article>
+
+        <!-- Navy tee -->
+        <article class="item col-6" data-screen-label="Navy tee card">
+          <div class="frame">
+            <img src="assets/photo-tee-navy-front.jpg" alt="Navy festival tee, front" style="object-position: center 38%;">
+          </div>
+          <div class="meta">
+            <span class="n">Festival Tee — Navy</span>
+            <span class="d">Oversized cotton · left-chest stamp · back wordmark</span>
+            <span class="access">$20 at the festival</span>
+          </div>
+        </article>
+
+        <!-- White tee -->
+        <article class="item col-6" data-screen-label="White tee card">
+          <div class="frame">
+            <img src="assets/photo-tee-white-back.jpg" alt="White festival tee, back" style="object-position: center 40%;">
+          </div>
+          <div class="meta">
+            <span class="n">Festival Tee — White</span>
+            <span class="d">Oversized cotton · left-chest stamp · back wordmark</span>
+            <span class="access">$20 at the festival</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FESTIVAL CLOSER -->
+  <section class="signup" id="tickets" data-screen-label="Tickets">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Come hang with us</span>
+        <h2>See you at <span class="script">the</span> fest.</h2>
+        <p>No online shop — the cups, the tote &amp; the tees all live at the festival. One morning only at Lenny Boy Brewing.</p>
+        <div class="fest-facts">
+          <div><span class="k">Canvas Tote</span><span class="v">VIP &amp; Early GA</span></div>
+          <div><span class="k">Festival Tees</span><span class="v">$20 each</span></div>
+          <div><span class="k">Coffee Samples</span><span class="v">Free for all</span></div>
+        </div>
+        <div class="hero-actions" style="margin-top: var(--s-6);">
+          <a class="btn" href="#" style="background: var(--tccf-crema); color: var(--tccf-black); border-color: var(--tccf-crema);">Tickets live now →</a>
+        </div>
+        <small>Sat, Sept 12 · 9 AM – 2 PM · Lenny Boy Brewing Co., Charlotte NC</small>
+      </div>
+      <div class="signup-mark">
+        <img src="assets/lockup-crema.png" alt="TCCF stamp">
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <img src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+      <span class="mono">© 2026 TCCF · A celebration of coffee &amp; the people that shape it</span>
+    </div>
+  </footer>
+
+</body>
+</html>

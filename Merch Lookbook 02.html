@@ -1,0 +1,207 @@
+<!-- @dsCard group="Brand" name="Merch Lookbook 02" subtitle="Tee photoshoot — stamp badge & back print, navy + white" viewport="1180x900" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF — Merch Lookbook 02</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--tccf-crema); color: var(--tccf-black); }
+
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
+
+  .masthead {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-6);
+    padding: clamp(48px, 8vh, 96px) 0 var(--s-7); flex-wrap: wrap;
+  }
+  .masthead h1 { margin: var(--s-3) 0 0; }
+  .masthead .lede { max-width: 32ch; color: var(--tccf-latte); }
+  .mast-logo { width: 200px; height: auto; flex-shrink: 0; }
+
+  .hr { height: 0; border: none; border-top: var(--bw-rule) solid var(--tccf-black); margin: 0; }
+
+  .section { padding: var(--s-8) 0 var(--s-10); }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+    .masthead { flex-direction: column; align-items: flex-start; }
+  }
+
+  .card { border: var(--bw-hair) solid var(--tccf-black); background: var(--tccf-off-white); display: flex; flex-direction: column; }
+  .card a.shot { display: block; position: relative; aspect-ratio: 4 / 5; overflow: hidden; isolation: isolate; }
+  .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card a.shot::after {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  .caption {
+    border-top: var(--bw-hair) solid var(--tccf-black); padding: var(--s-4) var(--s-5);
+    display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4);
+  }
+  .caption .idx { font-family: var(--font-display); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--fs-sm); }
+  .caption .spec { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); text-align: right; }
+
+  .footer { padding: var(--s-6) 0 var(--s-9); display: flex; justify-content: space-between; gap: var(--s-4); flex-wrap: wrap; }
+  .footer .micro { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="masthead" data-screen-label="Masthead">
+      <div>
+        <span class="eyebrow">MERCH — LOOKBOOK 02 · 2026</span>
+        <h1>Festival tees</h1>
+        <p class="lede">Stamp badge on the chest, full lockup on the back. Navy &amp; white, printed from the brand artwork files.</p>
+      </div>
+      <img class="mast-logo" src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+    </header>
+
+    <hr class="hr">
+
+    <section class="section" data-screen-label="Gallery">
+      <div class="grid">
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-front-cafe.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-front-cafe.png" alt="Navy tee with crema TCCF stamp badge, worn in a café">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">01 — Café</span>
+            <span class="spec">NAVY · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/white-front-cafe.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/white-front-cafe.png" alt="White tee with black TCCF stamp badge, worn in a café">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">02 — Café</span>
+            <span class="spec">WHITE · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-front-barista.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-front-barista.png" alt="Navy tee with crema TCCF stamp badge, barista at espresso machine">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">03 — Bar</span>
+            <span class="spec">NAVY · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-front-denim.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-front-denim.png" alt="Navy tee with crema TCCF stamp badge, styled with denim">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">04 — Street</span>
+            <span class="spec">NAVY · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-front-sunglasses.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-front-sunglasses.png" alt="Navy tee with crema TCCF stamp badge, model with sunglasses">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">05 — Portrait</span>
+            <span class="spec">NAVY · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/crema-held-shutter.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/crema-held-shutter.png" alt="Crema tee with black TCCF stamp badge, held up against a dark shutter">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">06 — Held</span>
+            <span class="spec">CREMA · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-hanger-studio.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-hanger-studio.png" alt="Navy tee with crema TCCF stamp badge on a hanger, studio">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">07 — Hanger</span>
+            <span class="spec">NAVY · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/white-hanger-terracotta.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/white-hanger-terracotta.png" alt="White tee with black TCCF stamp badge on a hanger against a terracotta wall">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">08 — Hanger</span>
+            <span class="spec">WHITE · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-pair-front-back.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-pair-front-back.png" alt="Navy tees front and back — stamp badge front, centered TCCF back print">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">09 — Pair</span>
+            <span class="spec">NAVY · FRONT + BACK PRINT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-front-hanger-crema.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-front-hanger-crema.png" alt="Navy tee with crema TCCF stamp badge on a hanger">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">10 — Hanger</span>
+            <span class="spec">NAVY · STAMP BADGE · FRONT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/white-back-model.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/white-back-model.png" alt="White tee with black centered TCCF back print, on model">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">11 — Back</span>
+            <span class="spec">WHITE · BACK PRINT</span>
+          </figcaption>
+        </figure>
+
+        <figure class="card" style="margin:0;">
+          <a class="shot" href="assets/photoshoot/navy-back-flat.png" target="_blank" rel="noopener">
+            <img src="assets/photoshoot/navy-back-flat.png" alt="Navy tee with crema centered TCCF back print, flat lay">
+          </a>
+          <figcaption class="caption">
+            <span class="idx">12 — Flat</span>
+            <span class="spec">NAVY · BACK PRINT · SPONSORS</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <footer class="footer">
+      <span class="micro">THE CHARLOTTE COFFEE FESTIVAL · MERCH</span>
+      <span class="micro">CLICK ANY SHOT TO OPEN FULL SIZE</span>
+    </footer>
+
+  </div>
+</body>
+</html>

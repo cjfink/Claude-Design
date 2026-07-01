@@ -1,0 +1,14 @@
+/* =====================================================================
+   The Charlotte Coffee Festival — Design System
+   styles.css · single entry point
+   Consumers link this one file; it pulls in the rest in cascade order.
+   ===================================================================== */
+
+/* 1 · Foundations — brand tokens, webfonts, base typography */
+@import "colors_and_type.css";
+
+/* 2 · Merch mockup styling — tee silhouettes + print type system */
+@import "tee-mockups.css";
+
+/* 3 · Festival Studio app theme — scoped UI tokens & components */
+@import "studio/theme.css";

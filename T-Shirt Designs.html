@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="T-Shirt Designs" subtitle="5 back-print directions — artwork + garment" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF — T-Shirt Designs</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="tee-mockups.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead" data-screen-label="Masthead">
+    <div>
+      <span class="eyebrow" style="color:var(--tccf-coral)">Festival Apparel · Back-Print Studies</span>
+      <h1 class="mast-title"><span class="script">Five ways to wear</span>The T-Shirt</h1>
+      <p class="lede">Five back-print directions built from the Night&nbsp;Swim presentation lockup — each shown as flat print artwork and on the garment, with a small front hit.</p>
+    </div>
+    <img class="mast-logo" src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+  </header>
+  <hr class="hr">
+
+  <main id="designs"></main>
+
+  <footer>
+    <p class="mono">Keep the copy · play the layout · TCCF 2026</p>
+  </footer>
+
+</div>
+
+<script>
+/* ---- shared print partials (copy kept verbatim) ---- */
+const NS = 'NIGHT SW<i>I</i>M COFFEE';
+const TAG = 'An annual celebration of coffee<br>and the people that shape it.';
+const wordmark = (big) => `
+  <div class="cclk"${big?' style="font-size:1.18em"':''}>
+    <span class="w">Charlotte</span>
+    <div class="row"><span class="rings"><b>T</b><b>C</b></span><span class="w">Coffee</span><span class="rings"><b>C</b><b>F</b></span></div>
+    <span class="w">Festival</span>
+  </div>`;
+const wordmarkPlain = () => `
+  <div class="cclk" style="font-size:1.32em">
+    <span class="w">Charlotte</span><span class="w">Coffee</span><span class="w">Festival</span>
+  </div>`;
+const sponsor = (src, lab='Sponsored by') => `
+  <div class="p-sponsor"><span class="lab">${lab}</span><img src="${src}" alt="maïzly — for all"></div>`;
+
+/* ---- layout renderers ---- */
+function renderPrint(d){
+  const mz = d.maizly;
+  switch(d.layout){
+    case 'stack': return {cls:'', html:`
+      <span class="p-present">Presented by</span>
+      <span class="p-nsbox">${NS}</span>
+      <span class="p-the">The</span>
+      ${wordmark()}
+      <div class="p-tag">${TAG}</div>
+      ${sponsor(mz)}`};
+    case 'seal': return {cls:'is-seal', html:`
+      <span class="p-present">Presented by</span>
+      <span class="p-nsbox">${NS}</span>
+      <img class="seal" src="${d.seal}" alt="The Charlotte Coffee Festival — a celebration of coffee &amp; the people that shape it">
+      ${sponsor(mz)}`};
+    case 'crest': return {cls:'', html:`
+      <img class="p-crest" src="${d.crest}" alt="TCCF crown crest">
+      ${wordmark()}
+      <div class="p-tag">${TAG}</div>
+      <hr class="p-rule">
+      <span class="p-present">Presented by · Night Swim Coffee</span>
+      ${sponsor(mz)}`};
+    case 'left': return {cls:'is-left', html:`
+      <span class="p-present">Presented by</span>
+      <span class="p-nsbox">${NS}</span>
+      <span class="p-the">The</span>
+      ${wordmark(true)}
+      <div class="p-tag">${TAG}</div>
+      ${sponsor(mz)}`};
+    case 'minimal': return {cls:'', html:`
+      <span class="p-present">Presented by · Night Swim Coffee</span>
+      <div style="height:0.55em"></div>
+      ${wordmarkPlain()}
+      <div class="p-tag">${TAG}</div>
+      <hr class="p-rule">
+      ${sponsor(mz,'Sponsored by Maïzly')}`};
+  }
+}
+function frontHit(d){
+  if(d.front.type==='img') return `<img class="tee-front__hit" src="${d.front.src}" alt="left-chest hit" style="width:${d.front.w||20}%">`;
+  if(d.front.type==='rings') return `<div class="tee-front__hit" style="width:auto"><div class="cclk" style="font-size:9px;color:var(--ink)"><div class="row"><span class="rings"><b>T</b><b>C</b><b>C</b><b>F</b></span></div></div></div>`;
+}
+
+/* ---- the five designs ---- */
+const DESIGNS = [
+  { num:'01', name:'The Stack', eyebrow:'Centered · Faithful',
+    concept:'The presentation lockup exactly as drawn — boxed Night Swim credit, script “The”, the stacked wordmark with TC·CF rings, tagline and the maïzly sponsor. The house style.',
+    colorway:'Navy', swatch:'#283651', ink:'#EBE5DB', gmt:'#283651', gmtShade:'#1c2740',
+    board:'dark', layout:'stack', maizly:'t shirt assets/maizly-vertical-crema.png',
+    front:{type:'img', src:'assets/lockup-crema.png', w:22}, fcap:'Left-chest seal' },
+
+  { num:'02', name:'The Seal', eyebrow:'Circular · Stamped',
+    concept:'Leads with the full circular festival seal — “a celebration of coffee & the people that shape it” curved around the crown — credited to Night Swim above and maïzly below. A classic merch stamp.',
+    colorway:'Vintage Cream', swatch:'#f1efe6', ink:'#181818', gmt:'#f1efe6', gmtShade:'#d6d2c4',
+    board:'light', layout:'seal', seal:'t shirt assets/tccf-lockup-black.png',
+    maizly:'t shirt assets/maizly-vertical-black.png',
+    front:{type:'img', src:'assets/cup-badge.png', w:20}, fcap:'Left-chest badge' },
+
+  { num:'03', name:'The Crest', eyebrow:'Crown-led · Bold',
+    concept:'Crown crest blown up at the top, the wordmark stacked beneath, with the Night Swim and maïzly credits split across a hairline.',
+    colorway:'Black', swatch:'#181818', ink:'#EBE5DB', gmt:'#181818', gmtShade:'#000000',
+    board:'dark', layout:'crest', crest:'t shirt assets/crown-crema.png',
+    maizly:'t shirt assets/maizly-vertical-crema.png',
+    front:{type:'img', src:'t shirt assets/crown-crema.png', w:15}, fcap:'Left-chest crest' },
+
+  { num:'04', name:'Off-Centre', eyebrow:'Editorial · Left-set',
+    concept:'The same elements pushed flush-left and scaled up for a modern, editorial back. Reads like a poster across the shoulders rather than a centred badge.',
+    colorway:'Forest', swatch:'#4A4B35', ink:'#EBE5DB', gmt:'#4A4B35', gmtShade:'#393a28',
+    board:'dark', layout:'left', maizly:'t shirt assets/maizly-vertical-crema.png',
+    front:{type:'rings'}, fcap:'Left-chest TCCF' },
+
+  { num:'05', name:'The Big Hit', eyebrow:'Minimal · Oversized',
+    concept:'Stripped back to a huge CHARLOTTE / COFFEE / FESTIVAL with the credits set quietly as type — no boxes, no badge. Loudest type, quietest everything else.',
+    colorway:'Stone', swatch:'#BAB492', ink:'#1f2018', gmt:'#c3bd9f', gmtShade:'#a9a283',
+    board:'light', layout:'minimal', maizly:'t shirt assets/maizly-vertical-black.png',
+    front:{type:'img', src:'assets/cup-badge.png', w:18}, fcap:'Left-chest badge' },
+];
+
+const root = document.getElementById('designs');
+root.innerHTML = DESIGNS.map((d,i)=>{
+  const p = renderPrint(d);
+  const styleVars = `--ink:${d.ink};--gmt:${d.gmt};--gmt-shade:${d.gmtShade};`;
+  return `
+  <section class="design" data-screen-label="Design ${d.num} — ${d.name}">
+    <div class="design-head">
+      <span class="design-num">${d.num}</span>
+      <div class="design-meta">
+        <span class="eyebrow">${d.eyebrow}</span>
+        <h2>${d.name}</h2>
+        <p>${d.concept}</p>
+      </div>
+      <div class="design-tags">
+        <span class="tag"><span class="sw" style="background:${d.swatch}"></span>${d.colorway}</span>
+        <span class="tag">Back + front hit</span>
+      </div>
+    </div>
+    <div class="design-grid">
+
+      <!-- FLAT ARTWORK -->
+      <div class="panel">
+        <div class="board ${d.board}" style="${styleVars}">
+          <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+          <div class="print ${p.cls}">${p.html}</div>
+        </div>
+        <div class="panel-cap"><span class="l">Back print · artwork</span><span class="r">1-colour screen</span></div>
+      </div>
+
+      <!-- GARMENT PREVIEW -->
+      <div class="panel">
+        <div class="garment" style="${styleVars}">
+          <div class="tee-set">
+            <div class="tee">
+              <div class="tee__cast"></div>
+              <div class="tee__body"></div>
+              <div class="tee__collar"></div>
+              <div class="tee__seam"></div>
+              <div class="tee__print"><div class="print ${p.cls}">${p.html}</div></div>
+            </div>
+            <div class="tee-front">
+              <div class="tee__cast"></div>
+              <div class="tee__body"></div>
+              <div class="tee__collar"></div>
+              ${frontHit(d)}
+              <span class="tee-front__label">Front · ${d.fcap}</span>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="panel-cap"><span class="l">On garment · ${d.colorway}</span><span class="r">Back &amp; front</span></div>
+      </div>
+
+    </div>
+  </section>
+  ${i<DESIGNS.length-1?'<hr class="hr">':''}`;
+}).join('');
+</script>
+</body>
+</html>

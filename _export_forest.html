@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forest Export</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100vw; height: 100vh; background: #111; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  #offscreen { position: fixed; left: -2000px; top: 0; width: 1080px; height: 1920px; }
+  #preview { max-width: 100%; max-height: 100%; object-fit: contain; display: none; }
+  #status { color: #888; font-family: monospace; font-size: 14px; }
+  #dl { display: none; margin-top: 20px; padding: 12px 28px; background: #B07A48; color: #fff;
+    font-family: monospace; font-size: 14px; letter-spacing: .1em; text-decoration: none;
+    text-transform: uppercase; cursor: pointer; border: none; }
+  #center { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.js"></script>
+</head>
+<body>
+<div id="offscreen"><div id="render-target"></div></div>
+<div id="center">
+  <img id="preview" alt="Forest Poster" />
+  <div id="status">Rendering poster…</div>
+  <a id="dl" download="TCCF-Forest-VIP-Sold-Out.png">⬇ Download 1080×1920 PNG</a>
+</div>
+
+<script type="text/babel" src="poster.jsx"></script>
+<script type="text/babel">
+ReactDOM.createRoot(document.getElementById('render-target')).render(
+  <Poster
+    w={1080}
+    colorway="forest"
+    layout="stack"
+    date="09.12.2026"
+    accent="copper"
+    heroNum=""
+    headline="VIP Sold Out"
+    scarcity="GA still available"
+    scriptWord=""
+    badgeText="VIP Access"
+    showBadge={true}
+    showRegMarks={true}
+  />
+);
+
+setTimeout(async () => {
+  const el = document.querySelector('#render-target .pst-mount');
+  const status = document.getElementById('status');
+  const preview = document.getElementById('preview');
+  const dl = document.getElementById('dl');
+  if (!el) { status.textContent = 'Error: element not found'; return; }
+  try {
+    status.textContent = 'Capturing…';
+    const dataUrl = await htmlToImage.toPng(el, {
+      width: 1080, height: 1920, pixelRatio: 1,
+    });
+    window.__posterDataUrl = dataUrl;
+    preview.src = dataUrl;
+    preview.style.display = 'block';
+    dl.href = dataUrl;
+    dl.style.display = 'inline-block';
+    status.textContent = '1080 × 1920 px · ready';
+  } catch(e) {
+    status.textContent = 'Error: ' + e.message;
+    console.error(e);
+  }
+}, 1800);
+</script>
+</body>
+</html>

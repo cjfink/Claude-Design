@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponsored By maïzly — asset</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  /* checkerboard so I can see transparency while previewing */
+  body.preview { background:
+    repeating-conic-gradient(#ccc 0% 25%, #eee 0% 50%) 50% / 40px 40px; }
+
+  .lockup {
+    width: 1200px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px;
+    padding: 40px;
+    color: var(--ink);
+  }
+  .lockup .lab {
+    font-family: var(--font-mono);
+    font-size: 76px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    /* optical: trailing letter-spacing pushes text right; nudge back */
+    text-indent: 0.34em;
+    line-height: 1;
+  }
+  .lockup img { width: 760px; height: auto; display: block; }
+</style>
+</head>
+<body class="preview">
+  <div id="cap" class="lockup" style="--ink:#181818;">
+    <span class="lab">Sponsored By</span>
+    <img id="mark" src="t shirt assets/maizly-horizontal-black.png" alt="maïzly — for all">
+  </div>
+<script>
+  // expose switching for capture
+  window.setInk = (which) => {
+    const c = document.getElementById('cap');
+    const m = document.getElementById('mark');
+    if (which === 'crema') {
+      c.style.setProperty('--ink', '#EBE5DB');
+      m.src = 't shirt assets/maizly-horizontal-crema.png';
+    } else {
+      c.style.setProperty('--ink', '#181818');
+      m.src = 't shirt assets/maizly-horizontal-black.png';
+    }
+  };
+</script>
+</body>
+</html>

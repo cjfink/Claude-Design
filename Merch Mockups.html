@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Merch Mockups" subtitle="Styled product shots — kraft cup, canvas tote, tees" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF — Merch Mockups</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body { margin: 0; background: var(--tccf-crema); color: var(--tccf-black); }
+
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-6);
+    padding: clamp(48px, 8vh, 96px) 0 var(--s-7); flex-wrap: wrap;
+  }
+  .masthead .lede { max-width: 30ch; color: var(--tccf-latte); }
+  .mast-title { margin: var(--s-3) 0 0; }
+  .mast-title .script { display: block; font-size: var(--fs-2xl); line-height: 0.8; margin-left: -2px; color: var(--tccf-latte); }
+  .mast-logo { width: 220px; height: auto; flex-shrink: 0; }
+
+  .hr { height: 0; border: none; border-top: var(--bw-rule) solid var(--tccf-black); margin: 0; }
+
+  /* ---------- Section ---------- */
+  .section { padding: var(--s-9) 0; }
+  .section-head { display: grid; gap: var(--s-3); margin-bottom: var(--s-7); max-width: 62ch; }
+  .section-head .eyebrow { color: var(--tccf-coral); }
+  .section-head h2 { margin: 0; }
+  .section-head .lede { color: var(--tccf-latte); margin: var(--s-1) 0 0; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+    .masthead { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ---------- Mockup card ---------- */
+  .card { border: var(--bw-hair) solid var(--tccf-black); background: var(--tccf-off-white); display: flex; flex-direction: column; }
+  .shot {
+    position: relative; min-height: 500px; flex: 1;
+    display: grid; place-items: center; overflow: hidden; isolation: isolate;
+  }
+  /* photographic grain on every shot */
+  .shot::after {
+    content: ""; position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  .caption {
+    border-top: var(--bw-hair) solid var(--tccf-black); padding: var(--s-4) var(--s-5);
+    display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4);
+  }
+  .caption .idx { font-family: var(--font-display); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--fs-sm); }
+  .caption .spec { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); text-align: right; }
+  .swatch { display: inline-block; width: 9px; height: 9px; border: 1px solid var(--tccf-black); margin-right: 6px; transform: translateY(1px); }
+
+  /* =========================================================
+     STAGE BACKDROPS
+     ========================================================= */
+  .shot--cup  { background: radial-gradient(125% 95% at 32% 8%, #dfe4e4 0%, #b9c0c1 48%, #8f9799 100%); }
+  .shot--tote { background: radial-gradient(130% 110% at 24% 4%, #e3dac9 0%, #cabfa9 42%, #8d8472 100%); }
+  .shot--tee  { background: radial-gradient(120% 95% at 50% 6%, #e6e2d8 0%, #cfc9bc 55%, #aaa392 100%); }
+  /* a hard diagonal light shaft for drama */
+  .shot--shaft::before {
+    content: ""; position: absolute; inset: -20%; z-index: 1; pointer-events: none;
+    background: linear-gradient(118deg, transparent 30%, rgba(255,255,255,0.34) 44%, rgba(255,255,255,0.34) 52%, transparent 64%);
+    mix-blend-mode: soft-light;
+  }
+  /* corner vignette */
+  .shot > .vig { position: absolute; inset: 0; z-index: 5; pointer-events: none; box-shadow: inset 0 0 120px 24px rgba(20,18,14,0.28); }
+
+  /* cast shadow blob shared */
+  .cast { position: absolute; z-index: 1; background: rgba(18,16,12,0.42); filter: blur(26px); border-radius: 50%; }
+
+  /* =========================================================
+     CUP — kraft to-go cup + black lid
+     ========================================================= */
+  .cup-stage { position: relative; width: 240px; height: 340px; z-index: 2; }
+  .cup-stage .cast { width: 200px; height: 150px; left: 70px; top: 188px; transform: rotate(18deg); }
+
+  .cup { position: absolute; left: 50%; top: 46%; width: 188px; transform: translate(-50%,-50%) rotate(-12deg); transform-origin: center; z-index: 2; }
+
+  .cup__lid { position: relative; width: 200px; left: -6px; z-index: 3; filter: drop-shadow(0 6px 6px rgba(0,0,0,0.35)); }
+  .cup__lid-top {
+    position: relative; width: 200px; height: 40px; border-radius: 50%;
+    background: radial-gradient(64% 92% at 34% 18%, #565250 0%, #2a2725 46%, #121110 100%);
+    box-shadow: inset 0 -5px 8px rgba(0,0,0,0.55), inset 0 3px 4px rgba(255,255,255,0.18);
+  }
+  .cup__lid-skirt {
+    position: relative; width: 192px; left: 4px; height: 30px; margin-top: -16px;
+    border-radius: 4px 4px 16px 16px / 4px 4px 26px 26px;
+    background: linear-gradient(90deg, #0d0d0c 0%, #131211 12%, #3a3633 50%, #131211 88%, #0a0a09 100%);
+    box-shadow: inset 0 -4px 6px rgba(0,0,0,0.5);
+  }
+  .cup__body {
+    position: relative; width: 178px; height: 196px; left: 5px; margin-top: -6px;
+    clip-path: polygon(2% 0, 98% 0, 86% 100%, 14% 100%);
+    overflow: hidden; z-index: 2;
+    background:
+      linear-gradient(91deg, rgba(60,40,18,0.40) 0%, rgba(60,40,18,0) 20%, rgba(255,251,242,0.30) 47%, rgba(60,40,18,0) 74%, rgba(40,26,10,0.46) 100%),
+      linear-gradient(180deg, rgba(255,255,255,0.10), rgba(70,48,22,0.10)),
+      #c7b394;
+  }
+  .cup__body img { position: absolute; top: 41%; left: 50%; transform: translate(-50%,-50%); width: 56%; z-index: 2; mix-blend-mode: multiply; opacity: 0.96; }
+  /* kraft cup with a text-only Night Swim credit: lift the badge, add the line */
+  .cup__body--credit img { top: 35%; width: 52%; }
+  .cup__credit {
+    position: absolute; top: 64%; left: 50%; transform: translate(-50%,-50%); width: 78%; z-index: 2;
+    text-align: center; mix-blend-mode: multiply; color: #2c2113;
+    font-family: var(--font-mono); font-size: 8px; line-height: 1.35; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .cup__credit span { display: block; font-size: 6.5px; letter-spacing: 0.18em; opacity: 0.72; margin-bottom: 2px; }
+
+  /* black cup variant */
+  .cup--black .cup__body {
+    background:
+      linear-gradient(91deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 22%, rgba(255,255,255,0.10) 48%, rgba(0,0,0,0) 74%, rgba(0,0,0,0.6) 100%),
+      #1b1b1b;
+  }
+  .cup--black .cup__body img { mix-blend-mode: normal; opacity: 1; width: 64%; }
+
+  /* =========================================================
+     TOTE — natural cotton canvas
+     ========================================================= */
+  .tote-stage { position: relative; width: 320px; height: 430px; z-index: 2; }
+  .tote-stage .cast { width: 250px; height: 120px; left: 80px; top: 350px; transform: rotate(8deg); }
+
+  .tote { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%) rotate(-1.5deg); width: 290px; z-index: 2;
+    filter: drop-shadow(22px 20px 18px rgba(0,0,0,0.22)); }
+  .tote__handle {
+    position: absolute; top: -78px; width: 80px; height: 120px;
+    border: 12px solid #d3c8af; border-bottom: none; border-radius: 48px 48px 0 0; background: transparent; z-index: 1;
+  }
+  .tote__handle::after { content:""; position:absolute; inset:-12px -12px auto -12px; height:12px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.12), rgba(0,0,0,0)); }
+  .tote__handle.l { left: 44px; transform: rotate(-3deg); }
+  .tote__handle.r { right: 44px; transform: rotate(2deg); }
+  .tote__bag {
+    position: relative; width: 290px; height: 322px; border-radius: 3px 3px 7px 7px; overflow: hidden; z-index: 2;
+    background:
+      linear-gradient(101deg, rgba(70,58,32,0.16) 0%, rgba(70,58,32,0) 16%, rgba(255,252,244,0.18) 42%, rgba(70,58,32,0) 80%, rgba(50,40,20,0.20) 100%),
+      #d8cdb4;
+  }
+  /* canvas weave */
+  .tote__bag::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; opacity: 0.5; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.04 0.16' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+  /* top hem + seam */
+  .tote__bag::after { content:""; position:absolute; top:0; left:0; right:0; height:18px; z-index:2;
+    background: rgba(0,0,0,0.06); box-shadow: 0 1px 0 rgba(0,0,0,0.16), inset 0 -1px 0 rgba(0,0,0,0.08); }
+  .tote__art { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; }
+  .tote__badge { width: 64%; margin-top: 22%; mix-blend-mode: multiply; }
+  .tote__present { display: flex; flex-direction: column; align-items: center; gap: 7px; margin-top: 16px; }
+  .tote__present span { font-family: var(--font-mono); font-size: 9px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: rgba(24,24,24,0.7); }
+  .tote__present img { width: 52px; }
+
+  /* forest variant */
+  .tote--forest .tote__handle { border-color: #44452f; }
+  .tote--forest .tote__bag {
+    background:
+      linear-gradient(101deg, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 16%, rgba(255,255,255,0.07) 42%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.26) 100%),
+      var(--tccf-forest);
+  }
+  .tote--forest .tote__bag::after { background: rgba(0,0,0,0.18); }
+  .tote--forest .tote__badge { mix-blend-mode: normal; }
+  .tote--forest .tote__present span { color: rgba(235,229,219,0.78); }
+
+  /* =========================================================
+     T-SHIRT — oversized, navy / white, front + back
+     ========================================================= */
+  .tee-stage { position: relative; width: 386px; height: 352px; z-index: 2; }
+  .tee-stage .cast { width: 304px; height: 58px; left: 42px; top: 298px; }
+  .tee { position: absolute; left: 50%; top: 49%; transform: translate(-50%,-50%); width: 366px; height: 322px; z-index: 2;
+    filter: drop-shadow(0 22px 20px rgba(0,0,0,0.20)); }
+  .tee__body { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+  /* boxy, oversized cut with drop shoulders */
+  .tee--front .tee__body {
+    clip-path: polygon(27% 9%, 41% 9%, 45% 14%, 50% 16%, 55% 14%, 59% 9%, 73% 9%, 96% 17%, 89% 35%, 74% 31%, 77% 96%, 23% 96%, 26% 31%, 11% 35%, 4% 17%);
+  }
+  .tee--back .tee__body {
+    clip-path: polygon(27% 8%, 41% 8%, 50% 11%, 59% 8%, 73% 8%, 96% 17%, 89% 35%, 74% 31%, 77% 96%, 23% 96%, 26% 31%, 11% 35%, 4% 17%);
+  }
+  .tee__body::after {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 85%, rgba(0,0,0,0.17)),
+      radial-gradient(120% 70% at 50% 3%, rgba(255,255,255,0.13), rgba(0,0,0,0) 50%),
+      radial-gradient(60% 50% at 50% 100%, rgba(0,0,0,0.12), rgba(0,0,0,0) 60%);
+  }
+  .tee__collar { position: absolute; left: 50%; transform: translateX(-50%); border-style: solid; z-index: 2; }
+  .tee--front .tee__collar { top: 7%; width: 80px; height: 30px; border-width: 5px; border-radius: 50%; clip-path: inset(40% 0 0 0); }
+  .tee--back .tee__collar { top: 7.5%; width: 88px; height: 26px; border-width: 6px; border-radius: 50%; clip-path: inset(0 0 54% 0); }
+  .tee__tag { position: absolute; top: 9.5%; left: 50%; transform: translateX(-50%); width: 15px; height: 17px; border-radius: 1px; z-index: 2; }
+
+  /* prints */
+  .tee__chest { position: absolute; z-index: 3; top: 26%; left: 65%; transform: translate(-50%,-50%); width: 19%; }
+  .tee__lockup { position: absolute; z-index: 3; top: 34%; left: 50%; transform: translate(-50%,-50%); width: 58%; }
+
+  /* navy colorway */
+  .tee--navy .tee__body { background: #26314c; }
+  .tee--navy .tee__collar { border-color: #20294035; border-color: rgba(15,20,34,0.5); }
+  .tee--navy .tee__tag { background: #e9e3d8; }
+  .tee--navy .cclockup { color: var(--tccf-crema); }
+  /* white colorway */
+  .tee--white .tee__body { background: #f4f3ec; }
+  .tee--white .tee__collar { border-color: rgba(120,116,104,0.4); }
+  .tee--white .tee__tag { background: #d3cec1; }
+  .tee--white .tee__chest { mix-blend-mode: multiply; }
+  .tee--white .cclockup { color: var(--tccf-black); }
+
+  /* stacked "The Charlotte Coffee Festival" back lockup, set in real type */
+  .cclockup { text-align: center; line-height: 0.96; font-size: 25px; }
+  .cclockup .cl-the { font-family: var(--font-script); font-style: italic; font-weight: 700; font-size: 0.6em; line-height: 1; display: block; margin-bottom: 0.04em; }
+  .cclockup .cl-word { font-family: var(--font-display); text-transform: uppercase; font-weight: 400; display: block; letter-spacing: 0.01em; }
+  .cclockup .cl-coffee { display: flex; align-items: center; justify-content: center; gap: 0.24em; }
+  .cclockup .cl-rings { display: inline-flex; gap: 0.1em; font-size: 0.32em; }
+  .cclockup .cl-rings b { display: inline-grid; place-items: center; width: 1.3em; height: 1.3em; border: 0.1em solid currentColor; border-radius: 50%; font-family: var(--font-display); font-weight: 400; line-height: 1; }
+  .cclockup .cl-desc { font-family: Georgia, "Times New Roman", serif; font-size: 0.285em; line-height: 1.18; margin-top: 0.6em; text-transform: none; letter-spacing: 0.005em; }
+
+  footer { padding: var(--s-8) 0 var(--s-9); text-align: center; }
+  footer .mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-stamp); text-transform: uppercase; color: var(--tccf-latte); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead" data-screen-label="Masthead">
+    <div>
+      <span class="eyebrow">Brand Merchandise · Mockups</span>
+      <h2 class="mast-title"><span class="script">The</span>Festival Merch</h2>
+    </div>
+    <img class="mast-logo" src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+  </header>
+  <hr class="hr">
+
+  <!-- ============ 4 OZ PAPER CUP ============ -->
+  <section class="section" data-screen-label="4oz Paper Cup">
+    <div class="section-head">
+      <span class="eyebrow">Merch · Drinkware</span>
+      <h2>4 oz Paper Cup</h2>
+      <p class="lede">Single-wall kraft cup with a black sip lid for the pour stations. The crown crest badge sits front and centre; a blacked-out run covers the espresso bar.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="shot shot--cup">
+          <div class="cup-stage">
+            <div class="cast"></div>
+            <div class="cup">
+              <div class="cup__lid"><div class="cup__lid-top"></div><div class="cup__lid-skirt"></div></div>
+              <div class="cup__body cup__body--credit">
+                <img src="assets/cup-badge.png" alt="TCCF crown crest badge">
+                <div class="cup__credit"><span>Presented by</span>Night Swim Coffee</div>
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">01 — Kraft</span>
+          <span class="spec"><span class="swatch" style="background:#c7b394"></span>Single wall · crest badge</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="shot shot--cup">
+          <div class="cup-stage">
+            <div class="cast"></div>
+            <div class="cup cup--black">
+              <div class="cup__lid"><div class="cup__lid-top"></div><div class="cup__lid-skirt"></div></div>
+              <div class="cup__body"><img src="assets/lockup-crema.png" alt="TCCF circular stamp"></div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">02 — Black</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-black)"></span>Single wall · circular stamp</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="hr">
+
+  <!-- ============ TOTE BAG ============ -->
+  <section class="section" data-screen-label="Tote Bag">
+    <div class="section-head">
+      <span class="eyebrow">Merch · Carry</span>
+      <h2>Tote Bag</h2>
+      <p class="lede">12 oz natural cotton canvas with the full tagline badge screened large on the front, the Night Swim Coffee lockup credited beneath. A forest run for the second drop.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="shot shot--tote shot--shaft">
+          <div class="tote-stage">
+            <div class="cast"></div>
+            <div class="tote">
+              <div class="tote__handle l"></div>
+              <div class="tote__handle r"></div>
+              <div class="tote__bag">
+                <div class="tote__art">
+                  <img class="tote__badge" src="assets/tote-badge.png" alt="TCCF tagline badge">
+                  <div class="tote__present">
+                    <span>Presented by</span>
+                    <img src="assets/nightswim-black.png" alt="Night Swim Coffee">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">01 — Natural Canvas</span>
+          <span class="spec"><span class="swatch" style="background:#d8cdb4"></span>Tagline badge · front</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="shot shot--tote shot--shaft">
+          <div class="tote-stage">
+            <div class="cast"></div>
+            <div class="tote tote--forest">
+              <div class="tote__handle l"></div>
+              <div class="tote__handle r"></div>
+              <div class="tote__bag">
+                <div class="tote__art">
+                  <img class="tote__badge" src="assets/lockup-crema.png" alt="TCCF circular stamp">
+                  <div class="tote__present">
+                    <span>Presented by</span>
+                    <img src="assets/nightswim-crema.png" alt="Night Swim Coffee">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">02 — Forest</span>
+          <span class="spec"><span class="swatch" style="background:var(--tccf-forest)"></span>Circular stamp · front</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="hr">
+
+  <!-- ============ T-SHIRT ============ -->
+  <section class="section" data-screen-label="T-Shirt">
+    <div class="section-head">
+      <span class="eyebrow">Merch · Apparel</span>
+      <h2>T-Shirt</h2>
+      <p class="lede">Oversized heavyweight cotton in navy and white. A small circular stamp on the left chest; the stacked wordmark and dictionary line printed large across the back.</p>
+    </div>
+    <div class="grid">
+
+      <!-- Navy · Front -->
+      <div class="card">
+        <div class="shot shot--tee">
+          <div class="tee-stage">
+            <div class="cast"></div>
+            <div class="tee tee--navy tee--front">
+              <div class="tee__body">
+                <div class="tee__collar"></div>
+                <img class="tee__chest" src="assets/lockup-crema.png" alt="TCCF circular stamp">
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">01 — Navy · Front</span>
+          <span class="spec"><span class="swatch" style="background:#26314c"></span>Left-chest stamp</span>
+        </div>
+      </div>
+
+      <!-- Navy · Back -->
+      <div class="card">
+        <div class="shot shot--tee">
+          <div class="tee-stage">
+            <div class="cast"></div>
+            <div class="tee tee--navy tee--back">
+              <div class="tee__body">
+                <div class="tee__collar"></div>
+                <div class="tee__tag"></div>
+                <div class="tee__lockup">
+                  <div class="cclockup">
+                    <span class="cl-the">The</span>
+                    <span class="cl-word">Charlotte</span>
+                    <span class="cl-word cl-coffee"><span class="cl-rings"><b>T</b><b>C</b></span>Coffee<span class="cl-rings"><b>C</b><b>F</b></span></span>
+                    <span class="cl-word">Festival</span>
+                    <span class="cl-desc">An annual celebration of coffee<br>and the people that shape it.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">02 — Navy · Back</span>
+          <span class="spec"><span class="swatch" style="background:#26314c"></span>Stacked wordmark</span>
+        </div>
+      </div>
+
+      <!-- White · Front -->
+      <div class="card">
+        <div class="shot shot--tee">
+          <div class="tee-stage">
+            <div class="cast"></div>
+            <div class="tee tee--white tee--front">
+              <div class="tee__body">
+                <div class="tee__collar"></div>
+                <img class="tee__chest" src="assets/lockup-black.png" alt="TCCF circular stamp">
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">03 — White · Front</span>
+          <span class="spec"><span class="swatch" style="background:#f4f3ec"></span>Left-chest stamp</span>
+        </div>
+      </div>
+
+      <!-- White · Back -->
+      <div class="card">
+        <div class="shot shot--tee">
+          <div class="tee-stage">
+            <div class="cast"></div>
+            <div class="tee tee--white tee--back">
+              <div class="tee__body">
+                <div class="tee__collar"></div>
+                <div class="tee__tag"></div>
+                <div class="tee__lockup">
+                  <div class="cclockup">
+                    <span class="cl-the">The</span>
+                    <span class="cl-word">Charlotte</span>
+                    <span class="cl-word cl-coffee"><span class="cl-rings"><b>T</b><b>C</b></span>Coffee<span class="cl-rings"><b>C</b><b>F</b></span></span>
+                    <span class="cl-word">Festival</span>
+                    <span class="cl-desc">An annual celebration of coffee<br>and the people that shape it.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vig"></div>
+        </div>
+        <div class="caption">
+          <span class="idx">04 — White · Back</span>
+          <span class="spec"><span class="swatch" style="background:#f4f3ec"></span>Stacked wordmark</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="hr">
+
+  <footer>
+    <p class="mono">Made in Charlotte · Brewed with intent · TCCF</p>
+  </footer>
+
+</div>
+</body>
+</html>

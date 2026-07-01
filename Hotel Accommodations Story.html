@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Accommodations Story · TCCF 2026</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#0e0d0b;overflow:hidden;}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:center;
+    -webkit-font-smoothing:antialiased;font-family:var(--font-body);}
+
+  /* Stage just holds the scaled post */
+  #stage{position:relative;flex-shrink:0;}
+
+  /* Post: fixed 1080×1920, scales via JS */
+  .post{
+    position:absolute;top:0;left:0;
+    width:1080px;height:1920px;
+    overflow:hidden;
+    transform-origin:top left;
+    background:#0c0a08;
+  }
+
+  /* ── Background photo ── */
+  .bg{
+    position:absolute;inset:0;
+    background:url('poster-assets/bg/b-barista.jpg') center 35% / cover no-repeat;
+  }
+  .bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(
+      180deg,
+      rgba(10,8,6,.75)  0%,
+      rgba(10,8,6,.20)  22%,
+      rgba(10,8,6,.10)  42%,
+      rgba(10,8,6,.60)  68%,
+      rgba(10,8,6,.97) 100%
+    );
+  }
+
+  /* ── Top: crest centered ── */
+  .top{
+    position:absolute;top:80px;left:0;right:0;
+    display:flex;flex-direction:column;align-items:center;gap:18px;z-index:2;
+  }
+  .crest{height:68px;width:auto;object-fit:contain;opacity:.88;flex-shrink:0;}
+  .top-kicker{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:.30em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.60;
+  }
+
+  /* ── Hero ── */
+  .hero{
+    position:absolute;top:300px;left:72px;right:72px;z-index:2;
+    display:flex;flex-direction:column;gap:20px;
+  }
+  .hero-kicker{
+    font-family:var(--font-mono);font-size:14px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--tccf-coral);
+  }
+  .hero-hed{
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:82px;line-height:.88;letter-spacing:-.018em;
+    color:var(--tccf-crema);
+    text-shadow:0 4px 48px rgba(0,0,0,.55);
+    hyphens:none;
+  }
+
+  /* ── Info card ── */
+  .card{
+    position:absolute;top:720px;left:72px;right:72px;z-index:2;
+    background:var(--tccf-crema);
+    padding:56px 60px;
+    display:flex;flex-direction:column;gap:36px;
+  }
+  .card-hotel{display:flex;flex-direction:column;gap:10px;}
+  .card-label{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--tccf-latte);
+  }
+  .card-hotel-name{
+    font-family:var(--font-display);
+    font-size:44px;line-height:1.00;letter-spacing:-.012em;
+    color:var(--tccf-black);
+  }
+  .rule{height:1px;background:rgba(24,24,24,.14);}
+  .card-details{display:flex;flex-direction:column;gap:24px;}
+  .card-detail{display:flex;flex-direction:column;gap:6px;}
+  .card-detail-val{
+    font-family:var(--font-display);font-size:30px;line-height:1.05;
+    letter-spacing:-.006em;color:var(--tccf-black);
+  }
+  .card-detail-sub{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;
+    color:var(--tccf-black);opacity:.48;margin-top:2px;
+  }
+
+  /* ── CTA ── */
+  .cta{
+    position:absolute;bottom:228px;left:72px;right:72px;z-index:2;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .cta-label{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.50;
+  }
+  .cta-url{
+    font-family:var(--font-display);font-size:40px;line-height:.95;
+    letter-spacing:-.010em;color:var(--tccf-crema);
+  }
+  .cta-path{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--tccf-coral);margin-top:4px;
+  }
+
+  /* ── Footer ── */
+  .footer{
+    position:absolute;bottom:0;left:0;right:0;height:200px;
+    background:var(--tccf-crema);
+    border-top:2px solid rgba(24,24,24,.14);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 72px;z-index:2;
+  }
+  .f-col{display:flex;flex-direction:column;gap:8px;}
+  .f-label{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--tccf-latte);
+  }
+  .f-val{
+    font-family:var(--font-display);font-size:32px;line-height:1.02;
+    letter-spacing:-.008em;color:var(--tccf-black);
+  }
+  .f-rule{width:1px;height:80px;background:rgba(24,24,24,.16);align-self:center;}
+</style>
+</head>
+<body>
+<div id="stage">
+<div class="post" id="post">
+
+  <div class="bg"></div>
+
+  <div class="top">
+    <img class="crest" src="poster-assets/crest-crema.png" alt="TCCF">
+    <span class="top-kicker">The Charlotte Coffee Festival · 2026</span>
+  </div>
+
+  <div class="hero">
+    <span class="hero-kicker">Now Available</span>
+    <div class="hero-hed">Hotel<br>Accommodations</div>
+  </div>
+
+  <div class="card">
+    <div class="card-hotel">
+      <span class="card-label">Our Hotel Partner</span>
+      <div class="card-hotel-name">Sonesta Charlotte<br>Lower South End</div>
+    </div>
+    <div class="rule"></div>
+    <div class="card-details">
+      <div class="card-detail">
+        <span class="card-label">Discounted Room Block</span>
+        <div class="card-detail-val">September 11, 2026</div>
+        <div class="card-detail-sub">Night before the festival</div>
+      </div>
+      <div class="card-detail">
+        <span class="card-label">Availability</span>
+        <div class="card-detail-val">Limited Rooms</div>
+        <div class="card-detail-sub">First come, first served</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <span class="cta-label">Book via link in bio</span>
+    <div class="cta-url" style="font-size: 30px">CLTCOFFEEFEESTIVAL.COM</div>
+    <div class="cta-path">→ Event Info → Hotel Accommodations</div>
+  </div>
+
+  <div class="footer">
+    <div class="f-col">
+      <span class="f-label">Festival Date</span>
+      <div class="f-val">Sept 12, 2026</div>
+    </div>
+    <div class="f-rule"></div>
+    <div class="f-col" style="text-align:right;">
+      <span class="f-label">Location</span>
+      <div class="f-val">Lenny Boy<br>Brewery · CLT</div>
+    </div>
+  </div>
+
+</div><!-- .post -->
+</div><!-- #stage -->
+
+<script>
+  const W = 1080, H = 1920;
+  function fit() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const s  = Math.min(vw / W, vh / H, 1);
+    const sw = Math.round(W * s);
+    const sh = Math.round(H * s);
+    const stage = document.getElementById('stage');
+    const post  = document.getElementById('post');
+    stage.style.width  = sw + 'px';
+    stage.style.height = sh + 'px';
+    post.style.transform = 'scale(' + s + ')';
+    post.style.transformOrigin = 'top left';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>

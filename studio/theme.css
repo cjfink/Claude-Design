@@ -1,0 +1,172 @@
+/* theme.css — Festival Studio. Light "crema" + dark "studio" themes,
+   layered depth, floating chrome. Loaded after colors_and_type.css. */
+
+:root {
+  --font-display: "Styrene B", "Helvetica Neue", sans-serif;
+  --font-body: "Styrene B", "Helvetica Neue", sans-serif;
+  --font-mono: "GT Flexa Mono", ui-monospace, monospace;
+
+  /* Brand constants */
+  --coral: #AA7050;
+  --forest: #4A4B35;
+  --espresso: #3A2C18;
+  --latte: #746137;
+  --crema: #EBE5DB;
+
+  /* Layer colors */
+  --c-power: #C9A227;
+  --c-water: #5C8AA6;
+  --c-emergency: #C24A3A;
+
+  --speed: 200ms;  /* @kind other */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);  /* @kind other */
+}
+
+/* ---------------- LIGHT (crema studio) ---------------- */
+[data-theme="light"] {
+  --bg: #F4F1EA;            /* app background */
+  --canvas: #E9E4D8;        /* canvas backdrop */
+  --lot: #DDD6C5;           /* venue ground */
+  --panel: #FBFAF6;         /* floating panels */
+  --panel-2: #F2EEE4;       /* nested surface */
+  --ink: #211C14;           /* primary text */
+  --ink-soft: #6A6253;      /* secondary text */
+  --ink-faint: #98907E;     /* tertiary text */
+  --line: rgba(33, 28, 20, 0.10);
+  --line-strong: rgba(33, 28, 20, 0.18);
+  --grid-dot: rgba(33, 28, 20, 0.13);
+  --accent: #AA7050;
+  --accent-ink: #FBFAF6;
+  --shadow-sm: 0 1px 2px rgba(33,28,20,0.08), 0 2px 6px rgba(33,28,20,0.06);
+  --shadow-md: 0 4px 14px rgba(33,28,20,0.10), 0 2px 6px rgba(33,28,20,0.06);
+  --shadow-lg: 0 18px 50px rgba(33,28,20,0.18), 0 6px 16px rgba(33,28,20,0.10);
+  --topbar: #FBFAF6;
+  --sel: rgba(170,112,80,0.14);
+}
+
+/* ---------------- DARK (espresso studio) ---------------- */
+[data-theme="dark"] {
+  --bg: #16130E;
+  --canvas: #1C1810;
+  --lot: #2A2418;
+  --panel: #221D15;
+  --panel-2: #2B251A;
+  --ink: #F0EADC;
+  --ink-soft: #B6AC97;
+  --ink-faint: #7E7560;
+  --line: rgba(240, 234, 220, 0.10);
+  --line-strong: rgba(240, 234, 220, 0.18);
+  --grid-dot: rgba(240, 234, 220, 0.10);
+  --accent: #C8895F;
+  --accent-ink: #16130E;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.5);
+  --shadow-lg: 0 22px 60px rgba(0,0,0,0.6), 0 6px 18px rgba(0,0,0,0.45);
+  --topbar: #1B1710;
+  --sel: rgba(200,137,95,0.18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+#root { height: 100%; }
+button { font-family: var(--font-body); color: inherit; cursor: pointer; }
+input, select, textarea { font-family: var(--font-body); }
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+.mono { font-family: var(--font-mono); }
+.kicker { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-soft); }
+
+/* Floating panel */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-md); }
+
+/* Icon button */
+.iconbtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 10px; border: none;
+  background: transparent; color: var(--ink-soft); transition: all var(--speed) var(--ease);
+}
+.iconbtn:hover { background: var(--panel-2); color: var(--ink); }
+.iconbtn.active { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow-sm); }
+.iconbtn:disabled { opacity: 0.35; cursor: default; }
+
+/* Pill button */
+.pill {
+  display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 15px;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--panel);
+  color: var(--ink); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.1em; transition: all var(--speed) var(--ease); white-space: nowrap;
+}
+.pill:hover { border-color: var(--line-strong); background: var(--panel-2); }
+.pill.accent { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.pill.accent:hover { filter: brightness(1.07); }
+.pill.dark { background: var(--ink); color: var(--bg); border-color: transparent; }
+
+/* Text input */
+.tin {
+  width: 100%; height: 38px; padding: 0 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--ink);
+  font-size: 14px; outline: none; transition: all var(--speed) var(--ease);
+}
+.tin:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--sel); }
+textarea.tin { height: auto; padding: 9px 12px; resize: vertical; line-height: 1.5; }
+
+.seg {
+  display: inline-flex; background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 10px; padding: 3px; gap: 2px;
+}
+
+/* Sidebar vendor-row edit button */
+.tccf-vedit {
+  flex-shrink: 0; border: 1px solid var(--line); background: var(--panel);
+  color: var(--ink-soft); font-family: var(--font-mono); font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 4px 9px; border-radius: 999px; cursor: pointer;
+  opacity: 0; transition: opacity 140ms var(--ease), background 140ms, color 140ms;
+}
+.tccf-vrow:hover .tccf-vedit { opacity: 1; }
+.tccf-vedit:hover { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+@media (hover: none) { .tccf-vedit { opacity: 0.85; } }
+
+/* Add-to-map palette buttons */
+.tccf-addbtn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 9px;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--ink);
+  border-radius: 10px; font-size: 12.5px; cursor: pointer; text-align: left;
+  transition: all 140ms var(--ease); min-width: 0;
+}
+.tccf-addbtn:hover { border-color: var(--accent); background: var(--sel); }
+.seg button {
+  border: none; background: transparent; color: var(--ink-soft); height: 30px; padding: 0 12px;
+  border-radius: 7px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.08em; transition: all var(--speed) var(--ease); display: inline-flex; align-items: center; gap: 6px;
+}
+.seg button.on { background: var(--panel); color: var(--ink); box-shadow: var(--shadow-sm); }
+
+/* Scrollbars */
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Canvas helpers */
+.cv-grab { cursor: grab; } .cv-grab:active { cursor: grabbing; }
+.cv-cross { cursor: crosshair; }
+.cv-default { cursor: default; }
+
+/* Animations */
+@keyframes pop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideIn { from { transform: translateX(18px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes pulseRing { 0%,100% { opacity: 0.5; transform: scale(1);} 50% { opacity: 1; transform: scale(1.08);} }
+@keyframes blueDot { 0%,100% { box-shadow: 0 0 0 0 rgba(92,138,166,0.5);} 50% { box-shadow: 0 0 0 10px rgba(92,138,166,0);} }
+@keyframes dash { to { stroke-dashoffset: -24; } }
+
+.anim-pop { animation: pop 220ms var(--ease); }
+.anim-slide-up { animation: slideUp 260ms var(--ease); }
+.anim-slide-in { animation: slideIn 280ms var(--ease); }
+
+.fade { transition: opacity var(--speed) var(--ease), transform var(--speed) var(--ease); }
+
+/* Responsive */
+.hide-sm { } 
+@media (max-width: 860px) { .hide-sm { display: none !important; } }
+@media (max-width: 1100px) { .hide-md { display: none !important; } }

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Latte Art Throwdown — Applications Open · 1080×1350</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; background: #0d0c09; width: 100vw; height: 100vh; overflow: hidden; }
+
+  .lat {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    background: #0d0c09;
+  }
+  /* film-grain noise — matches posts.jsx */
+  .lat::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9;
+    opacity: .045;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ─── HERO PHOTO ─── */
+  .lat-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px;
+    height: 860px;
+  }
+  .lat-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+  .lat-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(13,12,9,.78) 0%,
+      rgba(13,12,9,.06) 26%,
+      rgba(13,12,9,.03) 50%,
+      rgba(13,12,9,.94) 100%
+    );
+  }
+
+  /* ─── INNER OVERLAY ─── */
+  .lat-inner {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1080px;
+    height: 860px;
+    padding: 54px 58px 52px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: var(--tccf-crema);
+  }
+
+  /* top meta row */
+  .lat-mrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-shadow: 0 1px 10px rgba(0,0,0,.55);
+  }
+  .lat-mrow .left { display: flex; flex-direction: column; gap: 10px; }
+  .lat-mrow .left img {
+    height: 42px;
+    width: auto;
+    filter: drop-shadow(0 1px 8px rgba(0,0,0,.5));
+  }
+  .lat-mrow .comp {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--tccf-coral);
+  }
+  .lat-mrow .right {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: rgba(235,229,219,.78);
+  }
+
+  /* center banner */
+  .lat-banner {
+    align-self: center;
+    margin-top: 44px;
+    background: rgba(170,112,80,.93);
+    color: var(--tccf-off-white);
+    font-family: var(--font-mono);
+    font-size: 32px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    padding: 14px 38px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.32);
+  }
+
+  .lat-grow { flex: 1; }
+
+  /* hero title — bottom of photo */
+  .lat-title { display: flex; flex-direction: column; }
+  .lat-script {
+    font-family: var(--font-script);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 1.05;
+    color: rgba(235,229,219,.88);
+    text-shadow: 0 2px 20px rgba(0,0,0,.7);
+  }
+  .lat-h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 116px;
+    line-height: .87;
+    letter-spacing: -.01em;
+    color: var(--tccf-crema);
+    text-shadow: 0 4px 32px rgba(0,0,0,.55);
+  }
+
+  /* ─── CONTENT ZONE ─── */
+  .lat-body {
+    position: absolute;
+    top: 860px; left: 0; right: 0;
+    height: 490px;
+    background: #0d0c09;
+    padding: 30px 58px 44px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* overview */
+  .lat-overview {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: rgba(235,229,219,.4);
+    padding-bottom: 26px;
+    border-bottom: 1px solid rgba(235,229,219,.1);
+    line-height: 1.55;
+  }
+  .lat-overview b { color: var(--tccf-crema); font-weight: 400; }
+
+  /* rounds */
+  .lat-rounds { display: flex; flex-direction: column; }
+  .lat-round {
+    display: grid;
+    grid-template-columns: 30px 1fr 130px;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(235,229,219,.09);
+  }
+  .rn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgb(255, 255, 246);
+    opacity: 0.5;
+  }
+  .rm {
+    font-family: var(--font-display);
+    font-size: 21px;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    color: var(--tccf-crema);
+  }
+  .rd {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: rgba(235,229,219,.6);
+    text-align: right;
+  }
+  .rd.twist { color: var(--tccf-coral); }
+
+  /* CTA */
+  .lat-cta { margin-top: auto; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .lat-cta-ey {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(235,229,219,.32);
+  }
+  .lat-cta-btn {
+    display: block;
+    background: var(--tccf-coral);
+    color: var(--tccf-off-white);
+    font-family: var(--font-mono);
+    font-size: 22px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    padding: 20px 52px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(170,112,80,.3);
+  }
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#0d0c09">
+  <svg viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1080" height="1350" fill="#0d0c09"/>
+    <rect x="300" y="120" width="480" height="60" rx="4" fill="#4a4b35" opacity="0.9"/>
+    <rect x="200" y="700" width="680" height="8" fill="#ebe5db" opacity="0.15"/>
+    <text x="100" y="620" font-family="serif" font-size="160" fill="#ebe5db" opacity="0.9">THE</text>
+    <text x="100" y="780" font-family="serif" font-size="110" fill="#ebe5db" opacity="0.9">LATTE ART</text>
+    <text x="100" y="900" font-family="serif" font-size="110" fill="#ebe5db" opacity="0.9">THROWDOWN</text>
+    <rect x="100" y="1200" width="300" height="80" fill="#4a4b35"/>
+  </svg>
+</template>
+</head>
+<body>
+
+<div class="lat">
+
+  <!-- ── PHOTO ── -->
+  <div class="lat-bg">
+    <img src="uploads/DSCF5437_Original.JPG" alt="Barista pouring latte art" />
+    <div class="lat-scrim"></div>
+  </div>
+
+  <!-- ── OVERLAY ── -->
+  <div class="lat-inner">
+    <div class="lat-mrow">
+      <div class="left">
+        <img src="assets/logo-primary-crema.png" alt="The Charlotte Coffee Festival" style="width: 178px; height: 84px" />
+
+      </div>
+      <div class="right">
+        September 12, 2026<br />
+        12 – 1 PM<br />
+        Lenny Boy Brewing
+      </div>
+    </div>
+
+    <div class="lat-banner" style="background-color: rgba(74, 75, 53, 0.93)">Applications Open</div>
+    <div class="lat-grow"></div>
+
+    <div class="lat-title">
+      <span class="lat-script">an open invitation to</span>
+      <div class="lat-h1">THE<br />LATTE ART<br />THROWDOWN</div>
+    </div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="lat-body">
+
+    <div class="lat-overview"><b>16 BARISTAS</b><span style="color:#ffffff66">  ·  4 ROUNDS  ·  </span><b>FILMED &amp; PROJECTED LIVE</b><span style="color:#ffffff66">  ·  3 INDUSTRY JUDGES  ·  </span><b>PREMIUM PRIZES</b></div>
+
+    <div class="lat-rounds">
+      <div class="lat-round">
+        <span class="rn">R1</span>
+        <span class="rm">Whole Milk Latte</span>
+        <span class="rd">Heart</span>
+      </div>
+      <div class="lat-round">
+        <span class="rn">R2</span>
+        <span class="rm">CORNMILK LATTE</span>
+        <span class="rd">Rosetta</span>
+      </div>
+      <div class="lat-round">
+        <span class="rn">R3</span>
+        <span class="rm">Cornmilk Cortado</span>
+        <span class="rd">Wave Tulip</span>
+      </div>
+      <div class="lat-round">
+        <span class="rn">R4</span>
+        <span class="rm">Cornmilk Free Pour</span>
+        <span class="rd twist" style="color: rgb(255, 255, 255)">Dice Roll Twist</span>
+      </div>
+    </div>
+
+    <div class="lat-footer-row" style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px;">
+      <div class="lat-cta">
+        <span class="lat-cta-ey" style="color: rgba(255, 255, 255, 0.75); font-family: &quot;Styrene B&quot;">WWW.CLTCOFFEEFESTIVAL.COM/LATTE-ART</span>
+        <a class="lat-cta-btn" href="#" style="background-color: rgb(74, 75, 53)">Apply Now</a>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px; padding-bottom:4px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgb(235, 229, 219)">Presented by Night Swim Coffee</span>
+        <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgb(235, 229, 219)">Sponsored by Maizly</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<script>
+function scaleCanvas() {
+  var el = document.querySelector('.lat');
+  if (!el) return;
+  var W = 1080, H = 1350;
+  var vw = window.innerWidth, vh = window.innerHeight;
+  var scale = Math.min(vw / W, vh / H);
+  el.style.transformOrigin = 'top left';
+  el.style.transform = 'scale(' + scale + ')';
+  el.style.position = 'absolute';
+  el.style.left = ((vw - W * scale) / 2) + 'px';
+  el.style.top = ((vh - H * scale) / 2) + 'px';
+}
+document.addEventListener('DOMContentLoaded', scaleCanvas);
+window.addEventListener('resize', scaleCanvas);
+</script>
+</body>
+</html>

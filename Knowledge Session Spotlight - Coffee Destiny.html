@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Session Spotlight — Coffee Destiny · TCCF 2026</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#0e0d0b;}
+  body{
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    gap:20px;padding:24px 24px 32px;-webkit-font-smoothing:antialiased;
+    font-family:var(--font-body);
+  }
+
+  #stage{display:flex;align-items:center;justify-content:center;}
+
+  /* ── Post canvas ── */
+  .post{
+    position:relative;
+    width:1080px;height:1350px;
+    overflow:hidden;
+    transform-origin:center top;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.9);
+    background:#0c0a08;
+  }
+
+  /* ════════════════════════════════
+     PHOTO ZONE  (top 840 px)
+  ════════════════════════════════ */
+  .photo-zone{
+    position:absolute;top:0;left:0;right:0;height:880px;
+  }
+  .photo-bg{
+    position:absolute;inset:0;
+    background:url('uploads/latteart03-1.jpg') center 42% / cover no-repeat;
+  }
+  .photo-bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(
+      180deg,
+      rgba(10,8,6,.82)  0%,
+      rgba(10,8,6,.30)  28%,
+      rgba(10,8,6,.08)  50%,
+      rgba(10,8,6,.52)  72%,
+      rgba(10,8,6,.92) 100%
+    );
+  }
+
+  /* Top-left: crest + label */
+  .top-left{
+    position:absolute;top:58px;left:64px;
+    display:flex;flex-direction:column;gap:16px;
+    z-index:2;
+  }
+  .crest{height:44px;width:auto;opacity:.82;align-self:flex-start;flex-shrink:0;}
+  .incl-label{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.62;line-height:1.65;
+  }
+
+  /* Headline — right-aligned, anchored top-right */
+  .headline{
+    position:absolute;top:52px;right:64px;left:300px;
+    z-index:2;
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:96px;line-height:.88;letter-spacing:-.020em;
+    color:var(--tccf-crema);text-align:right;
+    text-shadow:0 4px 44px rgba(0,0,0,.55);
+  }
+
+  /* Session title — lower left */
+  .session-block{
+    position:absolute;bottom:60px;left:64px;right:64px;
+    z-index:2;display:flex;flex-direction:column;gap:12px;
+  }
+  .session-kicker{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--tccf-coral);
+  }
+  .session-title{
+    font-family:var(--font-display);
+    font-size:52px;line-height:1.04;letter-spacing:-.012em;
+    color:var(--tccf-crema);
+    text-shadow:0 3px 22px rgba(0,0,0,.6);
+  }
+
+  /* ════════════════════════════════
+     CREMA ZONE  (bottom 470 px)
+  ════════════════════════════════ */
+  .crema-zone{
+    position:absolute;top:880px;left:0;right:0;bottom:0;
+    background:var(--tccf-crema);
+    display:flex;flex-direction:column;
+    border-top:2px solid rgba(24,24,24,.20);
+  }
+
+  /* Main row */
+  .crema-main{
+    flex:1;display:flex;align-items:center;
+    padding:0 64px;gap:0;
+  }
+
+  /* Left: Coffee Destiny */
+  .partner-col{
+    flex:0 0 320px;
+    display:flex;flex-direction:column;gap:14px;
+    padding-right:52px;
+    align-self:stretch;
+    justify-content:center;
+    border-right:1px solid rgba(24,24,24,.16);
+  }
+  .feat-label{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--tccf-latte);
+  }
+  .cd-logo{
+    height:80px;width:auto;display:block;
+    align-self:flex-start;flex-shrink:0;
+    object-fit:contain;
+  }
+
+  /* Right: blurb + TCCF logo */
+  .blurb-col{
+    flex:1;padding-left:52px;
+    display:flex;flex-direction:column;gap:20px;
+    justify-content:center;
+  }
+  .blurb{
+    font-family:var(--font-display);
+    font-size:27px;line-height:1.18;letter-spacing:-.004em;
+    color:var(--tccf-black);
+    text-wrap:pretty;
+  }
+  .tccf-lockup{
+    height:62px;width:auto;
+    display:block;
+    align-self:flex-start;flex-shrink:0;
+    object-fit:contain;
+  }
+
+  /* Footer */
+  .crema-footer{
+    height:68px;
+    border-top:1px solid rgba(24,24,24,.15);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 64px;
+    flex-shrink:0;
+  }
+  .foot{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.20em;
+    text-transform:uppercase;color:var(--tccf-black);opacity:.42;
+    line-height:1.65;
+  }
+  .foot.right{text-align:right;}
+</style>
+</head>
+<body>
+
+<div id="stage">
+<div class="post">
+
+  <!-- ── PHOTO ZONE ── -->
+  <div class="photo-zone">
+    <div class="photo-bg"></div>
+
+    <div class="top-left">
+      <img class="crest" src="poster-assets/crest-crema.png" alt="TCCF">
+      <span class="incl-label">Included With<br>Festival Admission</span>
+    </div>
+
+    <div class="headline">Knowledge<br>Session<br>Spotlight</div>
+
+    <div class="session-block">
+      <span class="session-kicker">Knowledge Session · TCCF 2026</span>
+      <div class="session-title">Coffee &amp;<br>Community With<br>Destiny</div>
+    </div>
+  </div>
+
+  <!-- ── CREMA ZONE ── -->
+  <div class="crema-zone">
+    <div class="crema-main">
+
+      <div class="partner-col">
+        <span class="feat-label">Featured Speaker</span>
+        <img class="cd-logo" src="uploads/coffee-destiny.png" alt="Coffee Destiny">
+      </div>
+
+      <div class="blurb-col">
+        <div class="blurb">Learn From Industry Leaders And Connect With Fellow Coffee Enthusiasts</div>
+        <img class="tccf-lockup" src="assets/logo-primary-black.png" alt="The Charlotte Coffee Festival">
+      </div>
+
+    </div>
+
+    <div class="crema-footer">
+      <span class="foot">Tickets Are Live On<br>www.cltcoffeefestival.com</span>
+      <span class="foot right">Lenny Boy Brewery<br>Charlotte, NC</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="lbl" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#4a4540;">
+  1080 × 1350 · Instagram 4:5
+</div>
+
+<script>
+  function fit(){
+    const lbl = document.getElementById('lbl');
+    const lblH = lbl ? lbl.offsetHeight + 20 : 32;
+    const availH = Math.max(300, window.innerHeight - lblH - 68);
+    const availW = Math.max(300, window.innerWidth - 48);
+    const s = Math.min(availW / 1080, availH / 1350, 1);
+    document.querySelector('.post').style.transform = 'scale('+s+')';
+    document.getElementById('stage').style.height = (1350*s)+'px';
+    document.getElementById('stage').style.width  = (1080*s)+'px';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+</script>
+</body>
+</html>

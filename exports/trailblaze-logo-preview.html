@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trail Blaze Coffee Academy — Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:#181818;
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    gap:64px;flex-wrap:wrap;padding:48px;
+    font-family:var(--font-body);
+  }
+  .logo-block{
+    display:flex;flex-direction:column;align-items:center;gap:0;
+  }
+  .tb{
+    font-family:'Cinzel',Georgia,serif;
+    font-weight:600;
+    letter-spacing:0.06em;
+    line-height:1;
+    text-transform:uppercase;
+  }
+  .ca{
+    font-family:var(--font-mono);
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    line-height:1;
+  }
+  /* — White on dark — */
+  .on-dark .tb{ color:#fff; font-size:38px; }
+  .on-dark .ca{ color:#fff; font-size:12px; margin-top:6px; opacity:.82; }
+
+  /* — Black on crema — */
+  .on-crema{ background:var(--tccf-crema); padding:28px 40px; }
+  .on-crema .tb{ color:#181818; font-size:38px; }
+  .on-crema .ca{ color:#181818; font-size:12px; margin-top:6px; opacity:.70; }
+
+  .label{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:#555;margin-top:20px;
+  }
+</style>
+</head>
+<body>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <div class="logo-block on-dark">
+      <div class="tb">Trail Blaze</div>
+      <div class="ca">Coffee Academy</div>
+    </div>
+    <span class="label">White · on dark</span>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <div class="logo-block on-crema">
+      <div class="tb">Trail Blaze</div>
+      <div class="ca">Coffee Academy</div>
+    </div>
+    <span class="label">Black · on crema</span>
+  </div>
+
+</body>
+</html>

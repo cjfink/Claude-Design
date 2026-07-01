@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See Bird Go — DJ Announcement · TCCF 2026</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#0e0d0b;}
+  body{
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    gap:20px;padding:24px 24px 32px;-webkit-font-smoothing:antialiased;
+    font-family:var(--font-body);
+  }
+
+  /* ── Stage ── */
+  #stage{display:flex;align-items:center;justify-content:center;}
+  .post{
+    position:relative;width:1080px;height:1350px;overflow:hidden;
+    transform-origin:center top;box-shadow:0 30px 80px -20px rgba(0,0,0,.9);
+    display:none;
+  }
+  .post.active{display:block;}
+
+  /* ── Controls ── */
+  #controls{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+    font-family:var(--font-mono);
+  }
+  .var-btn{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:#7a7368;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);
+    padding:10px 20px;cursor:pointer;transition:.15s;border-radius:2px;
+  }
+  .var-btn:hover{color:#ccc;border-color:rgba(255,255,255,.22);}
+  .var-btn.active{color:var(--tccf-crema);border-color:var(--tccf-coral);background:rgba(170,112,80,.12);}
+  .note{color:#4a4540;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;}
+
+  /* ══════════════════════════════════════════════
+     VARIATION A — DARK EDITORIAL (headphones)
+  ══════════════════════════════════════════════ */
+  #va{background:#111010;}
+
+  #va .photo-a{
+    position:absolute;inset:0 0 320px 0;
+    background:url('uploads/see bird go.jpeg') center 30%/cover no-repeat;
+  }
+  #va .photo-a::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(
+      180deg,
+      rgba(14,13,11,.55) 0%,
+      rgba(14,13,11,.05) 30%,
+      rgba(14,13,11,.10) 55%,
+      rgba(14,13,11,.80) 78%,
+      rgba(14,13,11,1.0) 100%
+    );
+  }
+
+  /* top badge */
+  #va .top-a{
+    position:absolute;top:54px;left:0;right:0;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+    z-index:2;
+  }
+  #va .crest-a{height:68px;width:auto;opacity:.95;}
+  #va .eyebrow-a{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.36em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.75;
+  }
+
+  /* name stack */
+  #va .name-a{
+    position:absolute;bottom:310px;left:0;right:0;
+    display:flex;flex-direction:column;align-items:flex-start;
+    padding:0 70px;gap:0;z-index:2;
+  }
+  #va .script-a{
+    font-family:var(--font-script);font-style:italic;font-size:52px;
+    color:var(--tccf-crema);line-height:1;margin-bottom:4px;opacity:.90;
+  }
+  #va .dj-name-a{
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:148px;line-height:.85;letter-spacing:-.02em;
+    color:var(--tccf-crema);
+    text-shadow:0 4px 40px rgba(0,0,0,.6);
+  }
+
+  /* bottom band */
+  #va .band-a{
+    position:absolute;bottom:0;left:0;right:0;height:300px;
+    background:#111010;border-top:1px solid rgba(235,229,219,.10);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+    padding:0 70px;gap:18px;z-index:2;
+  }
+  #va .time-row-a{display:flex;align-items:center;gap:20px;}
+  #va .time-big-a{
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:60px;line-height:1;color:var(--tccf-crema);letter-spacing:-.01em;
+  }
+  #va .time-dot-a{
+    width:6px;height:6px;border-radius:50%;background:var(--tccf-coral);flex-shrink:0;
+  }
+  #va .info-col-a{display:flex;flex-direction:column;gap:5px;}
+  #va .info-line-a{
+    font-family:var(--font-mono);font-size:14px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.72;line-height:1.4;
+  }
+  #va .rule-a{width:100%;height:1px;background:rgba(235,229,219,.12);}
+  #va .bottom-meta-a{
+    display:flex;align-items:center;justify-content:space-between;width:100%;
+  }
+  #va .lock-a{height:38px;width:auto;opacity:.72;}
+  #va .url-a{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.20em;
+    text-transform:uppercase;color:var(--tccf-latte);
+  }
+
+  /* ══════════════════════════════════════════════
+     VARIATION B — CLT PRIDE (Charlotte jacket)
+  ══════════════════════════════════════════════ */
+  #vb{background:#0e1218;}
+
+  #vb .photo-b{
+    position:absolute;inset:0 0 0 0;
+    background:url('uploads/see bird go 2.jpeg') center 20%/cover no-repeat;
+  }
+  #vb .photo-b::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(
+      180deg,
+      rgba(10,13,20,.72) 0%,
+      rgba(10,13,20,.05) 25%,
+      rgba(10,13,20,.0)  45%,
+      rgba(10,13,20,.60) 68%,
+      rgba(10,13,20,.97) 100%
+    );
+  }
+
+  #vb .top-b{
+    position:absolute;top:52px;left:70px;right:70px;
+    display:flex;align-items:center;justify-content:space-between;
+    z-index:2;
+  }
+  #vb .tag-b{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--tccf-crema);opacity:.80;
+    border:1px solid rgba(235,229,219,.30);padding:9px 16px;
+  }
+  #vb .crest-b{height:60px;width:auto;opacity:.92;}
+
+  #vb .bottom-b{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:0 70px 64px;z-index:2;
+    display:flex;flex-direction:column;gap:0;
+  }
+  #vb .script-b{
+    font-family:var(--font-script);font-style:italic;font-size:56px;
+    color:var(--tccf-crema);line-height:1.1;opacity:.92;margin-bottom:6px;
+  }
+  #vb .dj-name-b{
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:136px;line-height:.85;letter-spacing:-.025em;
+    color:#ffffff;text-shadow:0 0 60px rgba(0,80,160,.45);
+  }
+  #vb .divider-b{
+    width:100%;height:1px;background:rgba(235,229,219,.20);margin:28px 0 22px;
+  }
+  #vb .info-row-b{
+    display:flex;align-items:flex-end;justify-content:space-between;
+  }
+  #vb .left-b{display:flex;flex-direction:column;gap:8px;}
+  #vb .time-b{
+    font-family:var(--font-display);text-transform:uppercase;font-size:46px;
+    color:var(--tccf-crema);line-height:1;letter-spacing:-.01em;
+  }
+  #vb .date-b{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.68;
+  }
+  #vb .stamp-b{
+    width:150px;height:150px;opacity:.88;
+    filter:invert(1);
+  }
+
+  /* ══════════════════════════════════════════════
+     VARIATION C — FESTIVAL POSTER (crema, RV)
+  ══════════════════════════════════════════════ */
+  #vc{background:var(--tccf-crema);}
+
+  #vc .header-c{
+    position:absolute;top:0;left:0;right:0;height:120px;
+    background:var(--tccf-black);
+    display:flex;align-items:center;justify-content:center;gap:28px;
+    padding:0 70px;
+  }
+  #vc .rule-c{height:1px;flex:1;background:rgba(235,229,219,.18);}
+  #vc .eyebrow-c{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.36em;
+    text-transform:uppercase;color:var(--tccf-crema);white-space:nowrap;
+  }
+
+  #vc .name-block-c{
+    position:absolute;top:120px;left:0;right:0;
+    background:var(--tccf-black);
+    padding:36px 70px 40px;
+    display:flex;flex-direction:column;gap:0;
+
+  }
+  #vc .label-c{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--tccf-crema);opacity:.55;margin-bottom:8px;
+  }
+  #vc .dj-name-c{
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:118px;line-height:.85;letter-spacing:-.025em;
+    color:var(--tccf-crema);
+  }
+  #vc .script-c{
+    font-family:var(--font-script);font-style:italic;font-size:50px;
+    color:var(--tccf-coral);line-height:1.1;margin-top:10px;
+    margin-left:6px;
+  }
+
+  #vc .photo-c{
+    position:absolute;left:0;right:0;top:580px;bottom:280px;
+    background:url('uploads/see bird go.jpg') center top/cover no-repeat;
+  }
+  #vc .photo-c::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,
+      rgba(235,229,219,.0) 60%,
+      rgba(235,229,219,.95) 100%
+    );
+  }
+  #vc .photo-c::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,
+      rgba(24,24,24,1)   0%,
+      rgba(24,24,24,.85) 14%,
+      rgba(24,24,24,.40) 26%,
+      rgba(24,24,24,.0)  40%
+    );
+    z-index:1;
+  }
+
+  #vc .bottom-c{
+    position:absolute;bottom:0;left:0;right:0;height:278px;
+    background:var(--tccf-crema);border-top:2px solid var(--tccf-black);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:14px;padding:0 70px;
+  }
+  #vc .time-big-c{
+    font-family:var(--font-display);text-transform:uppercase;
+    font-size:72px;line-height:1;color:var(--tccf-black);letter-spacing:-.015em;
+  }
+  #vc .pills-c{display:flex;align-items:center;gap:14px;}
+  #vc .pill-c{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--tccf-black);opacity:.65;
+  }
+  #vc .pill-dot-c{
+    width:4px;height:4px;border-radius:50%;background:var(--tccf-latte);opacity:.6;
+  }
+  #vc .rule2-c{width:100%;height:1px;background:rgba(24,24,24,.14);}
+  #vc .footer-c{
+    display:flex;align-items:center;justify-content:space-between;width:100%;
+  }
+  #vc .lock-c{height:38px;width:auto;mix-blend-mode:multiply;opacity:.85;}
+  #vc .crest-c{height:56px;width:auto;mix-blend-mode:multiply;opacity:.55;}
+</style>
+</head>
+<body>
+
+<!-- VARIATION A — DARK EDITORIAL -->
+<div id="stage">
+<div id="va" class="post active">
+  <div class="photo-a"></div>
+
+  <div class="top-a">
+    <img class="crest-a" src="poster-assets/crest-crema.png" alt="TCCF">
+    <span class="eyebrow-a">DJ Announcement · TCCF 2026</span>
+  </div>
+
+  <div class="name-a">
+    <div class="script-a">presenting</div>
+    <div class="dj-name-a">See<br>Bird<br>Go</div>
+  </div>
+
+  <div class="band-a">
+    <div class="time-row-a">
+      <div class="time-big-a">10 AM – 1 PM</div>
+      <div class="time-dot-a"></div>
+      <div class="info-col-a">
+        <span class="info-line-a">September 12, 2026</span>
+        <span class="info-line-a">Lenny Boy Brewery · Charlotte, NC</span>
+      </div>
+    </div>
+    <div class="rule-a"></div>
+    <div class="bottom-meta-a">
+      <img class="lock-a" src="assets/logo-primary-crema.png" alt="The Charlotte Coffee Festival">
+      <span class="url-a">cltcoffeefestival.com</span>
+    </div>
+  </div>
+</div>
+
+<!-- VARIATION B — CLT PRIDE -->
+<div id="vb" class="post">
+  <div class="photo-b"></div>
+
+  <div class="top-b">
+    <span class="tag-b">DJ Announcement</span>
+    <img class="crest-b" src="poster-assets/crest-crema.png" alt="TCCF">
+  </div>
+
+  <div class="bottom-b">
+    <div class="script-b">the sounds of</div>
+    <div class="dj-name-b">See<br>Bird<br>Go</div>
+    <div class="divider-b"></div>
+    <div class="info-row-b">
+      <div class="left-b">
+        <div class="time-b">10 AM – 1 PM</div>
+        <div class="date-b">Sept 12 · Lenny Boy Brewery · CLT</div>
+      </div>
+      <img class="stamp-b" src="assets/tccf-stamp-circle.png" alt="The Charlotte Coffee Festival">
+    </div>
+  </div>
+</div>
+
+<!-- VARIATION C — FESTIVAL POSTER -->
+<div id="vc" class="post">
+  <div class="header-c">
+    <div class="rule-c"></div>
+    <span class="eyebrow-c">The Charlotte Coffee Festival 2026 · Presents</span>
+    <div class="rule-c"></div>
+  </div>
+
+  <div class="name-block-c">
+    <div class="label-c">DJ · Live Set</div>
+    <div class="dj-name-c">See<br>Bird<br>Go</div>
+    <div class="script-c">she's playing your city</div>
+  </div>
+
+  <div class="photo-c"></div>
+
+  <div class="bottom-c">
+    <div class="time-big-c">10 AM – 1 PM</div>
+    <div class="pills-c">
+      <span class="pill-c">September 12, 2026</span>
+      <div class="pill-dot-c"></div>
+      <span class="pill-c">Lenny Boy Brewery</span>
+      <div class="pill-dot-c"></div>
+      <span class="pill-c">Charlotte, NC</span>
+    </div>
+    <div class="rule2-c"></div>
+    <div class="footer-c">
+      <img class="lock-c" src="assets/lockup-black.png" alt="The Charlotte Coffee Festival">
+      <img class="crest-c" src="poster-assets/crest-crema.png" alt="TCCF" style="filter:invert(1) brightness(0);">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Controls -->
+<div id="controls">
+  <button class="var-btn active" data-var="va">A — Dark Editorial</button>
+  <button class="var-btn" data-var="vb">B — CLT Pride</button>
+  <button class="var-btn" data-var="vc">C — Festival Poster</button>
+  <span class="note">1080 × 1350 · Instagram 4:5</span>
+</div>
+
+<script>
+  const posts = document.querySelectorAll('.post');
+  const btns  = document.querySelectorAll('.var-btn');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.var;
+      posts.forEach(p => p.classList.toggle('active', p.id === id));
+      btns.forEach(b => b.classList.toggle('active', b === btn));
+      try { localStorage.setItem('sbg_post_var', id); } catch(e){}
+    });
+  });
+
+  // Restore last selection
+  try {
+    const saved = localStorage.getItem('sbg_post_var');
+    if(saved) document.querySelector('[data-var="'+saved+'"]')?.click();
+  } catch(e){}
+
+  // Scale to viewport
+  function fit(){
+    const ctrlH = document.getElementById('controls').offsetHeight;
+    const availH = window.innerHeight - ctrlH - 72;
+    const availW = window.innerWidth - 48;
+    const s = Math.min(availW / 1080, availH / 1350, 1);
+    document.querySelectorAll('.post').forEach(p => {
+      p.style.transform = 'scale('+s+')';
+    });
+    document.getElementById('stage').style.height = (1350 * s) + 'px';
+    document.getElementById('stage').style.width  = (1080 * s) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+</script>
+</body>
+</html>

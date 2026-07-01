@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF 2026 — 4:5 Post</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  :root{
+    --ink:#181818; --espresso:#211e1a; --cream:#EBE5DB; --offwhite:#F7F6F2;
+    --muted:#BAB492; --coral:#AA7050; --latte:#746137;
+    --tint:0.16;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%; background:#0c0b0a;}
+  body{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+       padding:22px; -webkit-font-smoothing:antialiased; font-family:var(--font-body);}
+
+  #stage{display:flex; align-items:center; justify-content:center;}
+  #poster{
+    position:relative; width:1080px; height:1350px; overflow:hidden;
+    background:#1a1714; transform-origin:center center; color:var(--cream);
+    box-shadow:0 26px 70px -24px rgba(0,0,0,.8);
+  }
+
+  .bg{position:absolute; inset:0; background-size:cover; background-position:center 50%;}
+  .grad{position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,17,14,.88) 0%, rgba(20,17,14,.40) 26%, rgba(20,17,14,.34) 46%, rgba(20,17,14,.66) 66%, rgba(20,17,14,.92) 78%);}
+  .tint{position:absolute; inset:0; background:#16120f; opacity:var(--tint);}
+  .grain{position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  .content{position:absolute; left:0; right:0; top:0; height:940px;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    padding:62px 70px 26px; text-align:center;}
+
+  .top{display:flex; flex-direction:column; align-items:center; gap:15px;}
+  .crest{height:80px; width:auto; opacity:.96;}
+  .eyebrow{font-family:var(--font-mono); font-size:14px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--cream); opacity:.82;}
+
+  .headline{display:flex; flex-direction:column; align-items:center; gap:2px; margin-top:auto;}
+  .script{font-family:var(--font-script); font-style:italic; font-size:54px; line-height:.8;
+    color:var(--cream); margin-bottom:6px; transform:translateX(-110px) rotate(-4deg); opacity:.95;}
+  .hl-stack{font-family:var(--font-display); text-transform:uppercase; font-weight:400;
+    font-size:114px; line-height:.9; letter-spacing:-.015em; color:var(--offwhite);
+    text-shadow:0 2px 30px rgba(0,0,0,.35);}
+  .hl-stack span{display:block;}
+  .hl-stack .coffee{color:var(--cream);}
+
+  .dateline{display:flex; align-items:center; gap:20px; margin-top:26px;}
+  .dateline .rule{height:1.5px; width:62px; background:var(--cream); opacity:.7;}
+  .dateline .d{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.06em;
+    font-size:36px; color:var(--cream);}
+
+  .details{display:flex; flex-direction:column; align-items:stretch; gap:0; width:700px;
+    border-top:1.5px solid rgba(235,229,219,.34); margin-top:auto;}
+  .drow{display:flex; align-items:center; gap:16px; padding:14px 4px;
+    border-bottom:1.5px solid rgba(235,229,219,.20);}
+  .drow:last-child{border-bottom:none;}
+  .drow svg{width:25px; height:25px; flex:0 0 25px; stroke:var(--cream); stroke-width:1.6; fill:none;
+    stroke-linecap:round; stroke-linejoin:round; opacity:.92;}
+  .drow .lbl{font-family:var(--font-mono); font-size:12.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); width:96px; text-align:left; flex:0 0 96px;}
+  .drow .val{font-family:var(--font-display); text-transform:uppercase; letter-spacing:.005em;
+    font-size:23px; color:var(--cream); text-align:left; line-height:1.04;}
+  .drow .val .sub{display:block; font-family:var(--font-mono); text-transform:uppercase;
+    font-size:12.5px; letter-spacing:.16em; color:var(--muted); margin-top:6px;}
+
+  /* ---------- tiered partner band ---------- */
+  .partners{position:absolute; left:0; right:0; bottom:0; height:410px; background:var(--cream);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:32px 64px 34px; gap:24px; box-shadow:inset 0 2px 0 rgba(33,30,26,.9);}
+  .tiers{display:flex; align-items:center; justify-content:center; gap:54px; width:100%;}
+  .tier{display:flex; flex-direction:column; align-items:center; gap:14px;}
+  .tlabel{font-family:var(--font-mono); font-size:12px; letter-spacing:.30em; text-transform:uppercase; color:var(--latte);}
+  .t-logo{max-height:66px; max-width:230px; width:auto; object-fit:contain;}
+  .t-logo.maizly{max-height:50px;}
+  .tdiv{width:1px; height:78px; background:rgba(33,30,26,.18);}
+
+  .plabel{display:flex; align-items:center; gap:16px; width:100%; justify-content:center;}
+  .plabel .r{height:1px; flex:1; background:rgba(33,30,26,.20);}
+  .plabel span{font-family:var(--font-mono); font-size:12px; letter-spacing:.32em;
+    text-transform:uppercase; color:var(--latte);}
+  .logo-grid{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    column-gap:32px; row-gap:16px; width:100%;}
+  .logo-grid img{height:42px; max-width:150px; width:auto; object-fit:contain; opacity:.92;}
+  .logo-grid img.tall{height:54px;}
+
+  /* ---------- preview controls ---------- */
+  #controls{display:flex; align-items:center; gap:22px; flex-wrap:wrap; justify-content:center;
+    font-family:var(--font-mono); color:#c9c2b6; font-size:12px; letter-spacing:.04em;
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+    padding:12px 18px; border-radius:10px; max-width:1080px;}
+  #controls .grp{display:flex; align-items:center; gap:10px;}
+  #controls .lab{text-transform:uppercase; letter-spacing:.18em; color:#8c857a; font-size:10.5px;}
+  .thumb{width:38px; height:38px; border-radius:6px; background-size:cover; background-position:center 45%;
+    cursor:pointer; border:2px solid transparent; opacity:.7; transition:.15s;}
+  .thumb:hover{opacity:1;}
+  .thumb.active{border-color:var(--coral); opacity:1;}
+  #controls input[type=range]{accent-color:var(--coral); width:120px;}
+  .note{color:#6f6960; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="poster">
+    <div class="bg" id="bg"></div>
+    <div class="grad"></div>
+    <div class="tint"></div>
+    <div class="grain"></div>
+
+    <div class="content">
+      <div class="top">
+        <img class="crest" src="poster-assets/crest-crema.png" alt="TCCF crest">
+        <div class="eyebrow">A Celebration of Coffee &amp; the People That Shape It</div>
+      </div>
+
+      <div class="headline">
+        <div class="script">The</div>
+        <div class="hl-stack">
+          <span>Charlotte</span>
+          <span class="coffee">Coffee</span>
+          <span>Festival</span>
+        </div>
+        <div class="dateline">
+          <span class="rule"></span>
+          <span class="d">September 12, 2026</span>
+          <span class="rule"></span>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="drow">
+          <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="lbl">Location</div>
+          <div class="val">Lenny Boy Brewing Co.<span class="sub">Charlotte, NC</span></div>
+        </div>
+        <div class="drow">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <div class="lbl">Time</div>
+          <div class="val">9 AM – 2 PM</div>
+        </div>
+        <div class="drow">
+          <svg viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 0 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v3M13 11v2M13 16v3"/></svg>
+          <div class="lbl">Tickets</div>
+          <div class="val">Live Now<span class="sub">cltcoffeefest.com</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="partners">
+      <div class="tiers">
+        <div class="tier">
+          <span class="tlabel">Presented By</span>
+          <img class="t-logo" src="poster-assets/logos/night-swim.png" alt="Night Swim Coffee">
+        </div>
+        <div class="tdiv"></div>
+        <div class="tier">
+          <span class="tlabel">Sponsored By</span>
+          <img class="t-logo maizly" src="poster-assets/logos/maizly.png" alt="Maizly">
+        </div>
+      </div>
+
+      <div class="plabel"><span class="r"></span><span>Supporting Partners</span><span class="r"></span></div>
+      <div class="logo-grid">
+        <img src="poster-assets/logos/odeko.png" alt="Odeko">
+        <img src="poster-assets/logos/barista.png" alt="Barista Magazine">
+        <img src="poster-assets/logos/charlotte-water.png" alt="Charlotte Water">
+        <img src="poster-assets/logos/coffee-destiny.png" alt="Coffee Destiny">
+        <img src="poster-assets/logos/miir.png" alt="MiiR">
+        <img src="poster-assets/logos/simonelli.png" alt="Simonelli Group">
+        <img src="poster-assets/logos/hornets.png" alt="Charlotte Hornets">
+        <img src="poster-assets/logos/baratza.png" alt="Baratza">
+        <img src="poster-assets/logos/califia.png" alt="Califia Farms">
+        <img src="poster-assets/logos/moccamaster.png" alt="Moccamaster">
+        <img src="poster-assets/logos/morning-miles.png" class="tall" alt="Morning Miles with Jo">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="controls">
+  <div class="grp">
+    <span class="lab">Background</span>
+    <div class="thumb" data-bg="a-pourover" style="background-image:url('poster-assets/bg/a-pourover.jpg')"></div>
+    <div class="thumb" data-bg="b-barista" style="background-image:url('poster-assets/bg/b-barista.jpg')"></div>
+    <div class="thumb" data-bg="c-crowd" style="background-image:url('poster-assets/bg/c-crowd.jpg')"></div>
+    <div class="thumb" data-bg="d-espresso" style="background-image:url('poster-assets/bg/d-espresso.jpg')"></div>
+  </div>
+  <div class="grp">
+    <span class="lab">Overlay</span>
+    <input id="ov" type="range" min="0" max="45" value="16">
+  </div>
+  <span class="note">Controls aren't part of the 1080×1350 export</span>
+</div>
+
+<script>
+  const poster = document.getElementById('poster');
+  const bg = document.getElementById('bg');
+  const KEY='tccf_post45_bg', KEYOV='tccf_post45_ov';
+  function setBg(slug){
+    bg.style.backgroundImage = "url('poster-assets/bg/"+slug+".jpg')";
+    document.querySelectorAll('.thumb').forEach(t=>t.classList.toggle('active', t.dataset.bg===slug));
+    try{localStorage.setItem(KEY,slug);}catch(e){}
+  }
+  document.querySelectorAll('.thumb').forEach(t=>t.addEventListener('click',()=>setBg(t.dataset.bg)));
+  const ov=document.getElementById('ov');
+  ov.addEventListener('input',()=>{ const v=ov.value/100; document.documentElement.style.setProperty('--tint',v); try{localStorage.setItem(KEYOV,ov.value);}catch(e){} });
+
+  let startBg='c-crowd', startOv='20';
+  try{ startOv=localStorage.getItem(KEYOV)||startOv; }catch(e){}
+  setBg(startBg); ov.value=startOv; document.documentElement.style.setProperty('--tint', startOv/100);
+
+  function fitHead(){
+    const stack=poster.querySelector('.hl-stack');
+    stack.style.fontSize='';
+    const cs=getComputedStyle(stack);
+    const base=parseFloat(cs.fontSize), ls=parseFloat(cs.letterSpacing)||0;
+    const ctx=(fitHead._c||(fitHead._c=document.createElement('canvas'))).getContext('2d');
+    ctx.font=cs.fontWeight+' '+base+'px '+cs.fontFamily;
+    let max=0;
+    stack.querySelectorAll('span').forEach(s=>{const t=s.textContent;const w=ctx.measureText(t).width+Math.max(0,t.length-1)*ls; if(w>max)max=w;});
+    const avail=1080-140-6;
+    if(max>avail) stack.style.fontSize=(base*avail/max)+'px';
+  }
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fitHead);}
+  window.addEventListener('load',fitHead); fitHead();
+
+  function fit(){
+    const cs=document.getElementById('controls').offsetHeight;
+    const availH = window.innerHeight - cs - 80;
+    const availW = window.innerWidth - 44;
+    const s = Math.min(availW/1080, availH/1350, 1);
+    poster.style.transform = 'scale('+s+')';
+    document.getElementById('stage').style.height = (1350*s)+'px';
+    document.getElementById('stage').style.width = (1080*s)+'px';
+  }
+  window.addEventListener('resize',fit); window.addEventListener('load',fit); fit();
+</script>
+</body>
+</html>

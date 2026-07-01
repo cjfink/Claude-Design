@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCCF 2026 — 4:5 Post v2</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  :root{
+    --cream:#EBE5DB; --offwhite:#F7F6F2;
+    --muted:#BAB492; --coral:#AA7050; --latte:#746137; --ink:#181818;
+    --tint:0.18;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%; background:#0c0b0a;}
+  body{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:18px; padding:22px; -webkit-font-smoothing:antialiased; font-family:var(--font-body);
+  }
+
+  #stage{display:flex; align-items:center; justify-content:center;}
+
+  #poster{
+    position:relative; width:1080px; height:1350px; overflow:hidden;
+    background:#1a1714; transform-origin:center center;
+    box-shadow:0 26px 70px -24px rgba(0,0,0,.8);
+    display:flex; flex-direction:column;
+  }
+
+  /* ─── Photo section ─── */
+  .photo-section{
+    position:relative; width:100%; height:1013px; flex:0 0 1013px; overflow:hidden;
+  }
+  .bg{
+    position:absolute; inset:0; background-size:cover; background-position:center 48%;
+  }
+  .grad{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,
+      rgba(18,14,11,.90) 0%,
+      rgba(18,14,11,.42) 30%,
+      rgba(18,14,11,.14) 52%,
+      rgba(18,14,11,.54) 74%,
+      rgba(18,14,11,.94) 100%
+    );
+  }
+  .tint{position:absolute; inset:0; background:#14100d; opacity:var(--tint);}
+  .grain{
+    position:absolute; inset:0; opacity:.055; mix-blend-mode:overlay; pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .photo-inner{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+
+  /* top row: title left, crest right */
+  .photo-top{
+    display:flex; flex-direction:row; align-items:flex-start; justify-content:space-between;
+    padding:44px 64px 0 62px;
+  }
+  .title-block{display:flex; flex-direction:column; gap:0;}
+  .script-the{
+    font-family:var(--font-script); font-style:italic; font-size:58px; line-height:.88;
+    color:var(--cream); opacity:.97; display:block; margin-bottom:2px;
+    transform:translateX(-4px);
+  }
+  .hl-stack{
+    font-family:var(--font-display); text-transform:uppercase; font-weight:400;
+    font-size:112px; line-height:.905; letter-spacing:-.018em; color:var(--offwhite);
+    text-shadow:0 3px 32px rgba(0,0,0,.45);
+  }
+  .hl-stack span{display:block;}
+
+  .crest{
+    height:118px; width:auto; flex:0 0 auto; opacity:.97; margin-top:4px;
+  }
+
+  /* info text blocks (used in partners section) */
+  .info-block{display:flex; flex-direction:column; gap:3px; flex:0 0 auto;}
+  .info-block .line{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--ink); opacity:.72; line-height:1.4;
+  }
+  .info-block.right .line{text-align:right;}
+
+  /* ─── Partners section ─── */
+  .partners{
+    flex:1; background:var(--cream); color:var(--ink);
+    display:flex; flex-direction:column;
+    padding:12px 62px 14px;
+    position:relative;
+  }
+
+  .lockup-corner{
+    position:absolute; bottom:20px; right:52px;
+    height:44px; width:auto; opacity:.70; mix-blend-mode:multiply;
+  }
+  .tickets-corner{
+    position:absolute; bottom:20px; left:52px;
+    display:flex; flex-direction:column; gap:3px;
+  }
+  .tickets-corner .tck-label{
+    font-family:var(--font-display); text-transform:uppercase; font-size:15px;
+    letter-spacing:.06em; color:var(--ink); opacity:.90; line-height:1;
+  }
+  .tickets-corner .tck-url{
+    font-family:var(--font-mono); font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--latte); line-height:1;
+  }
+  .sponsor-row{
+    display:flex; flex-direction:row; align-items:center;
+    gap:0; width:100%; margin-bottom:6px;
+  }
+  .s-label{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--latte); white-space:nowrap; flex:0 0 auto;
+  }
+  .s-rule-long{height:1px; background:rgba(33,30,26,.28); flex:1; margin-left:14px;}
+  .s-rule-short{height:1px; background:rgba(33,30,26,.28); width:72px; flex:0 0 72px; margin-left:14px;}
+  .s-gap{width:24px; flex:0 0 24px;}
+
+  /* Main logo row */
+  .logo-main{
+    display:flex; flex-direction:row; align-items:center;
+    flex:0 0 auto; margin-bottom:6px;
+  }
+  .logo-side{display:flex; align-items:center; flex:1;}
+  .logo-side.right{justify-content:flex-end;}
+  .vdiv{width:1px; height:52px; background:rgba(33,30,26,.22); flex:0 0 1px; margin:0 40px;}
+  .t-logo{max-height:60px; max-width:200px; width:auto; object-fit:contain;}
+  .t-logo.maizly{max-height:46px;}
+
+  /* Supporting partners */
+  .support-row{
+    display:flex; align-items:center; gap:14px; width:100%;
+    border-top:1px solid rgba(33,30,26,.22); padding-top:6px; margin-bottom:6px;
+  }
+  .support-row .r{height:1px; flex:1; background:rgba(33,30,26,.22);}
+  .support-row span{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.30em;
+    text-transform:uppercase; color:var(--latte); white-space:nowrap; flex:0 0 auto;
+  }
+
+  /* logo grid */
+  .logo-grid{
+    display:grid; grid-template-columns:repeat(12,1fr);
+    row-gap:0; align-items:center; justify-items:center;
+    width:100%; flex:1; align-content:space-evenly;
+  }
+  .logo-grid img{
+    grid-column:span 3;
+    height:34px; max-width:150px; width:auto; object-fit:contain; opacity:.92;
+    mix-blend-mode:multiply;
+  }
+  .logo-grid img.anchor{ height:42px; max-width:168px; }
+  /* bottom row: 3 logos span 4 cols each = full 12, naturally centred */
+  .logo-grid img.row3{ grid-column:span 4; }
+  /* icon/mark logos in row 3 */
+  .logo-grid img.mark{ height:64px; max-width:88px; }
+  /* Morning Miles circular mark */
+  .logo-grid img.mmiles{ height:82px !important; max-width:82px !important; width:auto !important; }
+
+  /* Row 3 sub-container: flex, centred, tight gap */
+  .row3-wrapper{
+    grid-column:1 / -1;
+    display:flex; align-items:center; justify-content:center; gap:52px;
+  }
+  .row3-wrapper img{ height:48px; max-width:145px; width:auto; object-fit:contain; opacity:.92; mix-blend-mode:multiply; }
+  .row3-wrapper img.mark{ height:52px; max-width:80px; }
+  .row3-wrapper img.mmiles{ height:72px !important; max-width:72px !important; width:auto !important; }
+
+  /* feature tagline */
+  .tagline{
+    position:absolute; bottom:80px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center;
+    padding:0 62px;
+  }
+  .tagline-text{
+    font-family:var(--font-mono); font-size:17px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--cream); opacity:.88; white-space:nowrap;
+  }
+  .tagline-dot{
+    font-family:var(--font-mono); font-size:17px; color:var(--cream);
+    opacity:.50; margin:0 20px;
+  }
+
+  /* ─── Preview controls ─── */
+  #controls{
+    display:flex; align-items:center; gap:22px; flex-wrap:wrap; justify-content:center;
+    font-family:var(--font-mono); color:#c9c2b6; font-size:12px; letter-spacing:.04em;
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+    padding:12px 18px; border-radius:10px; max-width:1080px;
+  }
+  #controls .grp{display:flex; align-items:center; gap:10px;}
+  #controls .lab{text-transform:uppercase; letter-spacing:.18em; color:#8c857a; font-size:10.5px;}
+  .thumb{
+    width:38px; height:38px; border-radius:6px; background-size:cover; background-position:center 45%;
+    cursor:pointer; border:2px solid transparent; opacity:.7; transition:.15s;
+  }
+  .thumb:hover{opacity:1;}
+  .thumb.active{border-color:var(--coral); opacity:1;}
+  #controls input[type=range]{accent-color:var(--coral); width:120px;}
+  .note{color:#6f6960; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="poster">
+
+    <!-- ── PHOTO SECTION ── -->
+    <div class="photo-section">
+      <div class="bg" id="bg"></div>
+      <div class="grad"></div>
+      <div class="tint"></div>
+      <div class="grain"></div>
+
+      <div class="photo-inner">
+
+        <!-- Title left · Crest right -->
+        <div class="photo-top">
+          <div class="title-block">
+            <span class="script-the">The</span>
+            <div class="hl-stack" id="hlstack">
+              <span>Charlotte</span>
+              <span>Coffee</span>
+              <span>Festival 2026</span>
+            </div>
+          </div>
+          <img class="crest" src="poster-assets/crest-crema.png" alt="TCCF">
+        </div>
+
+        <!-- Feature tagline -->
+        <div class="tagline">
+          <span class="tagline-text">50+ Vendors</span>
+          <span class="tagline-dot">&bull;</span>
+          <span class="tagline-text">Unlimited Samples</span>
+          <span class="tagline-dot">&bull;</span>
+          <span class="tagline-text">Live Competitions</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PARTNERS SECTION ── -->
+    <div class="partners">
+
+      <!-- Presented By ─── Sponsored By ──── -->
+      <div class="sponsor-row">
+        <span class="s-label">Presented By</span>
+        <div class="s-rule-long"></div>
+        <div class="s-gap"></div>
+        <span class="s-label">Sponsored By</span>
+        <div class="s-rule-short"></div>
+      </div>
+
+      <!-- Tier 1 logos with date/location flanking -->      
+      <div class="logo-main">
+        <div class="logo-side left">
+          <img class="t-logo" src="poster-assets/logos/night-swim.png" alt="Night Swim Coffee">
+        </div>
+        <div class="info-block" style="padding-right:20px;">
+          <div class="line">September 12th,</div>
+          <div class="line">9am to 2pm</div>
+        </div>
+        <div class="vdiv"></div>
+        <div class="info-block right" style="padding-left:20px;">
+          <div class="line">Lenny Boy Brewery</div>
+          <div class="line">Charlotte, NC</div>
+        </div>
+        <div class="logo-side right">
+          <img class="t-logo maizly" src="poster-assets/logos/maizly.png" alt="Maizly">
+        </div>
+      </div>
+
+      <!-- Supporting Partners ───────── -->
+      <div class="support-row">
+        <span class="r"></span>
+        <span>Supporting Partners</span>
+        <span class="r"></span>
+      </div>
+
+      <!-- supporting partner logos: 4 anchors / 4 supporting / 3 marks -->
+      <div class="logo-grid">
+        <!-- Row 1: Anchor brands -->
+        <img class="anchor" src="poster-assets/logos/odeko.png" alt="Odeko">
+        <img class="anchor" src="poster-assets/logos/miir.png" alt="MiiR">
+        <img class="anchor" src="poster-assets/logos/califia.png" alt="Califia Farms">
+        <img class="anchor" src="poster-assets/logos/baratza.png" alt="Baratza">
+        <!-- Row 2: Supporting brands -->
+        <img src="poster-assets/logos/coffee-destiny.png" alt="Coffee Destiny">
+        <img src="poster-assets/logos/moccamaster.png" alt="Moccamaster">
+        <img src="poster-assets/logos/barista.png" alt="Barista Magazine">
+        <img src="poster-assets/logos/charlotte-water.png" alt="Charlotte Water">
+        <!-- Row 3: Icon marks (span 4 each) -->
+        <!-- Row 3: tight centred flex wrapper -->
+        <div class="row3-wrapper">
+          <img src="poster-assets/logos/simonelli.png" alt="Simonelli Group">
+          <img class="mark" src="poster-assets/logos/hornets.png" alt="Charlotte Hornets" style="filter:grayscale(1);">
+          <img class="mmiles" src="poster-assets/logos/morning-miles.png" alt="Morning Miles with Jo">
+        </div>
+      </div>
+
+      <div class="tickets-corner">
+        <span class="tck-label">Tickets Live Now</span>
+        <span class="tck-url">www.cltcoffeefestival.com/tickets</span>
+      </div>
+      <img class="lockup-corner" src="assets/lockup-black.png" alt="TCCF" style="width: 65px; height: 65px">
+
+    </div> (not part of export) -->
+<div id="controls">
+  <div class="grp">
+    <span class="lab">Background</span>
+    <div class="thumb" data-bg="a-pourover" style="background-image:url('poster-assets/bg/a-pourover.jpg')"></div>
+    <div class="thumb" data-bg="b-barista" style="background-image:url('poster-assets/bg/b-barista.jpg')"></div>
+    <div class="thumb" data-bg="c-crowd" style="background-image:url('poster-assets/bg/c-crowd.jpg')"></div>
+    <div class="thumb" data-bg="d-espresso" style="background-image:url('poster-assets/bg/d-espresso.jpg')"></div>
+  </div>
+  <div class="grp">
+    <span class="lab">Overlay</span>
+    <input id="ov" type="range" min="0" max="45" value="18">
+  </div>
+  <span class="note">Controls not included in 1080×1350 export</span>
+</div>
+
+<script>
+  const poster = document.getElementById('poster');
+  const bg     = document.getElementById('bg');
+  const KEY    = 'tccf_post45v2_bg';
+  const KEYOV  = 'tccf_post45v2_ov';
+
+  function setBg(slug){
+    bg.style.backgroundImage = "url('poster-assets/bg/"+slug+".jpg')";
+    document.querySelectorAll('.thumb').forEach(t =>
+      t.classList.toggle('active', t.dataset.bg === slug)
+    );
+    try{ localStorage.setItem(KEY, slug); }catch(e){}
+  }
+  document.querySelectorAll('.thumb').forEach(t =>
+    t.addEventListener('click', () => setBg(t.dataset.bg))
+  );
+
+  const ov = document.getElementById('ov');
+  ov.addEventListener('input', () => {
+    document.documentElement.style.setProperty('--tint', ov.value / 100);
+    try{ localStorage.setItem(KEYOV, ov.value); }catch(e){}
+  });
+
+  // Restore state
+  let startBg = 'c-crowd', startOv = '18';
+  try{ startBg = localStorage.getItem(KEY)  || startBg; }catch(e){}
+  try{ startOv = localStorage.getItem(KEYOV) || startOv; }catch(e){}
+  setBg(startBg);
+  ov.value = startOv;
+  document.documentElement.style.setProperty('--tint', startOv / 100);
+
+  // Auto-scale headline so "Festival 2026" never overflows
+  function fitHead(){
+    const stack = document.getElementById('hlstack');
+    if(!stack) return;
+    stack.style.fontSize = '';
+    const cs  = getComputedStyle(stack);
+    const base = parseFloat(cs.fontSize);
+    const ctx = (fitHead._c || (fitHead._c = document.createElement('canvas'))).getContext('2d');
+    ctx.font = cs.fontWeight + ' ' + base + 'px ' + cs.fontFamily;
+    let maxW = 0;
+    stack.querySelectorAll('span').forEach(s => {
+      const w = ctx.measureText(s.textContent).width;
+      if(w > maxW) maxW = w;
+    });
+    const avail = 1080 - 62 - 64 - 148; // left pad + right pad + crest width
+    if(maxW > avail) stack.style.fontSize = (base * avail / maxW) + 'px';
+  }
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitHead);
+  window.addEventListener('load', fitHead);
+  fitHead();
+
+  // Scale poster to fit viewport
+  function fit(){
+    const ctrlH = document.getElementById('controls').offsetHeight;
+    const availH = window.innerHeight - ctrlH - 80;
+    const availW = window.innerWidth - 44;
+    const s = Math.min(availW / 1080, availH / 1350, 1);
+    poster.style.transform = 'scale(' + s + ')';
+    document.getElementById('stage').style.height = (1350 * s) + 'px';
+    document.getElementById('stage').style.width  = (1080 * s) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+</script>
+</body>
+</html>
